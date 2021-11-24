@@ -1,5 +1,5 @@
 <template>
-  <form>
+  <form @submit="submit" accesskey="enter">
     <div
       class="container mw-50 d-flex justify-content-center"
       style="max-width: 600px; margin: 0 auto"
@@ -9,8 +9,10 @@
           <h4>To load 3d model choose file or valid link to .gltf file</h4>
 
           <div class="p-x3">
-            <div class="form-group" v-if="!modelLink">
-              <label><i class="fas fa-upload"></i> GLTF/GLB File</label>
+            <div class="form-group" v-if="!$store.sharedModelLink">
+              <label class="form-label"
+                ><i class="fas fa-upload"></i> GLTF/GLB File</label
+              >
               <div class="input-group mb-3">
                 <input
                   @change="modelFileLoaded"
@@ -30,91 +32,42 @@
               </div>
             </div>
 
-            <div class="form-group py-3" v-if="!modelFile">
-              <label><i class="fas fa-link"></i> GLTF/GLB Link</label>
+            <div class="form-group py-3" v-if="!$store.sharedModelFile">
+              <label class="form-label"
+                ><i class="fas fa-link"></i> GLTF/GLB Link</label
+              >
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1">.gltf</span>
                 </div>
                 <input
                   class="form-control input-group"
-                  v-model="modelLink"
+                  v-model="$store.sharedModelLink"
                   placeholder="Link"
                   pattern=".+\.gltf|.+\.glb"
                   type="input"
-                  required
                 />
               </div>
             </div>
           </div>
+          <label class="form-label"
+            ><i class="fas fa-percentage"></i> Scale [{{ scale }}]</label
+          >
+          <input
+            type="range"
+            class="form-range"
+            v-model="scale"
+            min="0.05"
+            max="5"
+            step="0.1"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            :title="scale"
+          />
         </div>
-        <div class="col-12" style="padding-top: 3rem">
-          <h4>To load marker choose file or valid link to .patt file</h4>
-
-          <div class="p-x3">
-            <div class="form-group" v-if="!markerLink">
-              <label><i class="fas fa-upload"></i> PATT File</label>
-              <div class="input-group mb-3">
-                <input
-                  @change="markerFileLoaded"
-                  class="form-control input-group"
-                  placeholder="Choose model"
-                  ref="markerFiles"
-                  type="file"
-                  accept=".patt"
-                />
-                <button
-                  @click="clearMarkerSelection"
-                  class="btn btn-danger"
-                  type="reset"
-                >
-                  <i class="fas fa-times"></i>
-                </button>
-                <small class="input-group doomed">optional</small>
-              </div>
-            </div>
-
-            <div class="form-group py-3" v-if="!markerFile">
-              <label><i class="fas fa-link"></i> PATT Link</label>
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1">.patt</span>
-                </div>
-                <input
-                  class="form-control input-group"
-                  v-model="markerLink"
-                  placeholder="Link"
-                  pattern=".+\.patt"
-                  type="input"
-                />
-                <small class="input-group doomed">optional</small>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div
-          class="col-lg-12 col-sm-6 text-center"
-          v-if="modelFile || modelLink"
-        >
+        <div class="col-12 text-center">
           <div class="pb-3">
-              <button
-                type="submit"
-                class="my-submit-btn btn-lg btn-primary w-25"
-                @submit="submit"
-              >
-                <i class="fas fa-check"></i>
-              </button>
-          </div>
-        </div>
-
-        <div class="col-lg-12 col-sm-6 text-center" v-else>
-          <div class="pb-3">
-            <button
-              type="submit"
-              class="my-submit-btn btn-lg btn-primary w-25"
-              disabled @click="submit"
-            >
+            <button type="submit" class="my-submit-btn btn-lg btn-primary w-25">
               <i class="fas fa-check"></i>
             </button>
           </div>
@@ -127,42 +80,33 @@
 <script>
 export default {
   name: "InputGroup",
-  // inject: [
-  //   "modelFile",
-  //   "modelLink",
-  //   "markerFile",
-  //   "markerLink",
-  // ],
-
   data() {
     return {
-      modelFile: null,
-      modelLink: null,
-      markerFile: null,
-      markerLink: null,
+      scale: 1,
     };
   },
 
   methods: {
-    submit() {
-      console.log(this.$router.map());
-      // this.$router.push("modeler");
-    },
     modelFileLoaded() {
-      this.modelFile = this.$refs.modelFiles.files[0];
+      this.$store.sharedModelFile = URL.createObjectURL(
+        this.$refs.modelFiles.files[0]
+      );
     },
     clearModelSelection() {
-      this.modelFile = null;
+      this.$store.sharedModelFile = null;
     },
-    markerFileLoaded() {
-      this.markerFile = this.$refs.markerFiles.files[0];
-    },
-    markerModelSelection() {
-      this.markerFile = null;
+    submit() {
+      if (!this.$store.sharedModelFile && !this.$store.sharedModelLink) {
+        this.$store.sharedModelLink =
+          "https://raw.githubusercontent.com/nicolocarpignoli/nicolocarpignoli.github.io/master/ar-playground/models/CesiumMan.gltf";
+      }
+      this.$store.scale = { x: this.scale, y: this.scale, z: this.scale };
+      this.$router.push("modeler");
     },
   },
   props: {},
 };
 </script>
 
-<style></style>
+<style>
+</style>

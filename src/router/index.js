@@ -3,6 +3,7 @@ import nprogress from "nprogress";
 import InputGroup from "../components/InputGroup.vue";
 import Modeler from "../components/Modeler.vue";
 import NotFoundComponent from "../components/NotFoundComponent.vue";
+import Test from "../components/Test.vue";
 
 const routes = [
     {
@@ -18,6 +19,11 @@ const routes = [
             if (from.name == "input") next();
             else next('/');
         },
+    },
+    {
+        path: "/test",
+        name: "test",
+        component: Test,
     },
     {
         path: '/:pathMatch(.*)*',

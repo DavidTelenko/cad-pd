@@ -1,5 +1,5 @@
 <template>
-  <body>
+  <div>
     <section class="notFound">
       <div class="img">
         <router-link to="/">
@@ -20,7 +20,7 @@
         <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">NO</a>
       </div>
     </section>
-  </body>
+  </div>
 </template>
 
 <script>

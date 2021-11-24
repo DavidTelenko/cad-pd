@@ -1,39 +1,33 @@
 <template>
-  <div>
-    <a-assets>
-      <a-asset-item id="asset" :src="modelLink1 ? modelLink1 : modelFile">
-      </a-asset-item>
-    </a-assets>
-
-    <a-scene embedded arjs>
-      <a-marker id="asset" preset="shared-preset">
-        <a-box position="0 0.5 0" scale="0.1 0.1 0.1" gltf-model="#asset">
-        </a-box>
-      </a-marker>
-      <a-entity camera></a-entity>
-    </a-scene>
-  </div>
+  <a-scene embedded arjs>
+    <a-marker id="asset" preset="hiro">
+      <a-box
+        position="0 0 0"
+        :scale="$store.scale"
+        :gltf-model="
+          $store.sharedModelLink
+            ? $store.sharedModelLink
+            : $store.sharedModelFile
+        "
+      >
+      </a-box>
+    </a-marker>
+    <a-entity camera></a-entity>
+  </a-scene>
 </template>
 
 <script>
 export default {
-  inject: [
-    "modelProvided",
-    "modelFile",
-    "modelLink",
-    "markerFile",
-    "markerLink",
-  ],
-  name: "Modeler",
-
-  data: function () {
-    return {
-      modelLink1:
-        "https://3ckid.com/01/assets/mech_drone/scene.gltf",
-    };
+  beforeRouteLeave(to, from, next) {
+    this.$router.go(0);
+    next();
   },
 };
 </script>
 
-<style>
+<style scoped>
+span.zoomed {
+  transform: scale(1);
+  transform-origin: 0 0;
+}
 </style>
