@@ -93,24 +93,26 @@
           </div>
         </div>
 
-        <div class="col-12" v-if="modelFile || modelLink">
-          <div class="pb-3" style="width: 100%; margin-top: 10px">
+        <div
+          class="col-lg-12 col-sm-6 text-center"
+          v-if="modelFile || modelLink"
+        >
+          <div class="pb-3">
             <button
               type="submit"
-              class="my-submit-btn btn btn-primary w-25"
-              style="margin: 0 auto; display: block"
-              @submit="submit"
+              class="my-submit-btn btn-lg btn-primary w-25"
+              @click="submit"
             >
               <i class="fas fa-check"></i>
             </button>
           </div>
         </div>
-        <div class="col-12" v-else>
-          <div class="pb-3" style="width: 100%; margin-top: 10px">
+
+        <div class="col-lg-12 col-sm-6 text-center" v-else>
+          <div class="pb-3">
             <button
               type="submit"
-              class="my-submit-btn btn btn-primary w-25"
-              style="margin: 0 auto; display: block"
+              class="my-submit-btn btn-lg btn-primary w-25"
               disabled
             >
               <i class="fas fa-check"></i>
@@ -125,15 +127,14 @@
 <script>
 export default {
   name: "InputGroup",
-  inject: ["modelProvided"],
-  data() {
-    return {
-      modelFile: null,
-      modelLink: "",
-      markerFile: null,
-      markerLink: "",
-    };
-  },
+  inject: [
+    "modelProvided",
+    "modelFile",
+    "modelLink",
+    "markerFile",
+    "markerLink",
+  ],
+
   methods: {
     submit() {
       this.$router.push("modeler");
@@ -155,5 +156,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

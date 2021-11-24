@@ -1,7 +1,8 @@
 <template>
-  <!-- <div>
+  <div>
     <a-assets>
-      <a-asset-item id="asset" src="shared-link"> </a-asset-item>
+      <a-asset-item id="asset" :src="modelLink ? modelLink : modelFile">
+      </a-asset-item>
     </a-assets>
 
     <a-scene embedded arjs>
@@ -11,14 +12,18 @@
       </a-marker>
       <a-entity camera></a-entity>
     </a-scene>
-  </div> -->
-  <div>
-    <h1>Placeholder</h1>
   </div>
 </template>
 
 <script>
 export default {
+  inject: [
+    "modelProvided",
+    "modelFile",
+    "modelLink",
+    "markerFile",
+    "markerLink",
+  ],
   name: "Modeler",
 };
 </script>
