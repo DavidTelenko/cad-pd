@@ -37,6 +37,7 @@ h6 {
 .my-submit-btn:hover {
     background-color: #1d9439;
     border: none;
+    cursor: pointer;
 }
 
 .doomed {
