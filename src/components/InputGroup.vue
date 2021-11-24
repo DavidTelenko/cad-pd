@@ -98,13 +98,13 @@
           v-if="modelFile || modelLink"
         >
           <div class="pb-3">
-            <button
-              type="submit"
-              class="my-submit-btn btn-lg btn-primary w-25"
-              @click="submit"
-            >
-              <i class="fas fa-check"></i>
-            </button>
+              <button
+                type="submit"
+                class="my-submit-btn btn-lg btn-primary w-25"
+                @submit="submit"
+              >
+                <i class="fas fa-check"></i>
+              </button>
           </div>
         </div>
 
@@ -113,7 +113,7 @@
             <button
               type="submit"
               class="my-submit-btn btn-lg btn-primary w-25"
-              disabled
+              disabled @click="submit"
             >
               <i class="fas fa-check"></i>
             </button>
@@ -127,17 +127,26 @@
 <script>
 export default {
   name: "InputGroup",
-  inject: [
-    "modelProvided",
-    "modelFile",
-    "modelLink",
-    "markerFile",
-    "markerLink",
-  ],
+  // inject: [
+  //   "modelFile",
+  //   "modelLink",
+  //   "markerFile",
+  //   "markerLink",
+  // ],
+
+  data() {
+    return {
+      modelFile: null,
+      modelLink: null,
+      markerFile: null,
+      markerLink: null,
+    };
+  },
 
   methods: {
     submit() {
-      this.$router.push("modeler");
+      console.log(this.$router.map());
+      // this.$router.push("modeler");
     },
     modelFileLoaded() {
       this.modelFile = this.$refs.modelFiles.files[0];

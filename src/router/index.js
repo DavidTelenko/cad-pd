@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import nprogress from "nprogress";
 import InputGroup from "../components/InputGroup.vue";
 import Modeler from "../components/Modeler.vue";
+import NotFoundComponent from "../components/NotFoundComponent.vue";
 
 const routes = [
     {
@@ -18,10 +19,10 @@ const routes = [
             else next('/');
         },
     },
-    // {
-    //     path:"*",
-    //     component: NotFoundComponent
-    // }
+    {
+        path: '/:pathMatch(.*)*',
+        component: NotFoundComponent
+    }
 ];
 
 const router = createRouter({

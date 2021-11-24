@@ -1,7 +1,7 @@
 <template>
   <div>
     <a-assets>
-      <a-asset-item id="asset" :src="modelLink ? modelLink : modelFile">
+      <a-asset-item id="asset" :src="modelLink1 ? modelLink1 : modelFile">
       </a-asset-item>
     </a-assets>
 
@@ -25,6 +25,13 @@ export default {
     "markerLink",
   ],
   name: "Modeler",
+
+  data: function () {
+    return {
+      modelLink1:
+        "https://3ckid.com/01/assets/mech_drone/scene.gltf",
+    };
+  },
 };
 </script>
 
