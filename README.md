@@ -1,24 +1,13 @@
 # cad-pd
 
-## Project setup
-```
-npm install
-```
+Choose valid .gltf or .glb file
+https://www.khronos.org/gltf/
+https://en.wikipedia.org/wiki/GlTF
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+Alternatively choose link to .gltf or .glb file hosted online
 
-### Compiles and minifies for production
-```
-npm run build
-```
+In the opened camera use Hiro marker as achor
 
-### Lints and fixes files
-```
-npm run lint
-```
+![hiro logo anchor](https://upload.wikimedia.org/wikipedia/commons/4/48/Hiro_marker_ARjs.png)
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Enjoy AR Experience!
