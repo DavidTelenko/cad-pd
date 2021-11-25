@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import nprogress from "nprogress";
 import InputGroup from "../components/InputGroup.vue";
 import Modeler from "../components/Modeler.vue";
 import NotFoundComponent from "../components/NotFoundComponent.vue";
@@ -29,12 +28,5 @@ const router = createRouter({
     history: createWebHistory(process.env.BASE_URL),
     routes
 });
-
-router.beforeResolve((to, from, next) => {
-    if (to.name) { nprogress.start() }
-    next()
-})
-
-router.afterEach(() => { nprogress.done() })
 
 export default router;

@@ -25,9 +25,5 @@ export default {
 };
 </script>
 
-<style scoped>
-span.zoomed {
-  transform: scale(1);
-  transform-origin: 0 0;
-}
+<style>
 </style>
