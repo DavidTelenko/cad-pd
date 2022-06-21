@@ -6,6 +6,7 @@ import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import FormControl from "@material-ui/core/FormControl";
+import { Link } from "react-router-dom";
 // import AddLinkIcon from "@mui/icons-material/AddLink";
 
 const useStyles = makeStyles({
@@ -109,9 +110,11 @@ const FileUploader: FC = () => {
             onChange={(event, value) => onSliderChange(value)}
           />
         </div>
-        <Button variant="contained" color="primary">
-          Continue
-        </Button>
+        <Link to="/modeler">
+          <Button variant="contained" color="primary">
+            Continue
+          </Button>
+        </Link>
       </div>
     </>
   );

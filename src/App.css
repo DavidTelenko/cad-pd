@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap");
+
 .App {
   text-align: center;
   display: flex;
@@ -6,6 +8,7 @@
   justify-content: center;
   height: 100vh;
   background-color: #141a29;
+  font-family: "Nunito", sans-serif;
 }
 
 .App-logo {
