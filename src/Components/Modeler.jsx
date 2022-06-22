@@ -3,13 +3,13 @@
 // // import * as three from "three";
 import React, { Suspense, useState } from "react";
 import { DefaultXRControllers, ARCanvas, Interactive } from "@react-three/xr";
-// import { Text, useGLTF } from "@react-three/drei";
+import { Text, useGLTF } from "@react-three/drei";
 // import { useLoader } from "@react-three/fiber";
 // import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 // import { extend } from "react-three-fiber";
 import Model from "./Model";
 
-function Box({ color, size, scale, children, ...rest }: any) {
+function Box({ color, size, scale, children, ...rest }) {
   return (
     <mesh scale={scale} {...rest}>
       {/* <textGeometry args={["test", { font, size: 5, height: 1 }]} /> */}
@@ -20,9 +20,9 @@ function Box({ color, size, scale, children, ...rest }: any) {
   );
 }
 
-function Button(props: any) {
+function Button(props) {
   const [hover, setHover] = useState(false);
-  const [color, setColor] = useState<any>("blue");
+  const [color, setColor] = useState("blue");
 
   const onSelect = () => {
     setColor((Math.random() * 0xffffff) | 0);
@@ -46,7 +46,7 @@ function Button(props: any) {
           {/* <primitive object={gltf.scene} /> */}
 
           {/* <Model /> */}
-          {/* <Text
+          <Text
             position={[0, 0, 0.06]}
             fontSize={0.05}
             color="#000"
@@ -54,7 +54,7 @@ function Button(props: any) {
             anchorY="middle"
           >
             Hello react-xr!
-          </Text> */}
+          </Text>
         </Suspense>
       </Box>
     </Interactive>
