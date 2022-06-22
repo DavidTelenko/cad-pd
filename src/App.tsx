@@ -15,7 +15,7 @@ function App() {
       setSelectedFile(target.files[0]);
     }
   };
-
+  //
   useEffect(() => console.log(selectedFile), [selectedFile]);
 
   return (
