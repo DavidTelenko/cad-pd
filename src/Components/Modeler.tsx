@@ -3,13 +3,16 @@
 // // import * as three from "three";
 import React, { Suspense, useState } from "react";
 import { DefaultXRControllers, ARCanvas, Interactive } from "@react-three/xr";
-// import { Text } from "@react-three/drei";
-import { useLoader } from "@react-three/fiber";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+// import { Text, useGLTF } from "@react-three/drei";
+// import { useLoader } from "@react-three/fiber";
+// import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+// import { extend } from "react-three-fiber";
+import Model from "./Model";
 
 function Box({ color, size, scale, children, ...rest }: any) {
   return (
     <mesh scale={scale} {...rest}>
+      {/* <textGeometry args={["test", { font, size: 5, height: 1 }]} /> */}
       <boxBufferGeometry attach="geometry" args={size} />
       <meshPhongMaterial attach="material" color={color} />
       {children}
@@ -25,7 +28,7 @@ function Button(props: any) {
     setColor((Math.random() * 0xffffff) | 0);
   };
 
-  const gltf = useLoader(GLTFLoader, "../TryModel/show_04_4k.gltf");
+  // const gltf = useLoader(GLTFLoader, "../TryModel/show_04_4k.gltf");
 
   return (
     <Interactive
@@ -40,7 +43,9 @@ function Button(props: any) {
         {...props}
       >
         <Suspense fallback={null}>
-          <primitive object={gltf.scene} />
+          {/* <primitive object={gltf.scene} /> */}
+
+          <Model />
           {/* <Text
             position={[0, 0, 0.06]}
             fontSize={0.05}
