@@ -45,8 +45,8 @@ function Button(props) {
         <Suspense fallback={null}>
           {/* <primitive object={gltf.scene} /> */}
 
-          {/* <Model /> */}
-          <Text
+          <Model />
+          {/* <Text
             position={[0, 0, 0.06]}
             fontSize={0.05}
             color="#000"
@@ -54,7 +54,7 @@ function Button(props) {
             anchorY="middle"
           >
             Hello react-xr!
-          </Text>
+          </Text> */}
         </Suspense>
       </Box>
     </Interactive>
