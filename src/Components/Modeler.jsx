@@ -4,10 +4,14 @@
 import React, { Suspense, useState } from "react";
 import { DefaultXRControllers, ARCanvas, Interactive } from "@react-three/xr";
 import { Text, useGLTF } from "@react-three/drei";
-// import { useLoader } from "@react-three/fiber";
-// import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { useLoader } from "@react-three/fiber";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 // import { extend } from "react-three-fiber";
 import Model from "./Model";
+
+// type ModelProps = {
+//   link: string,
+// };
 
 function Box({ color, size, scale, children, ...rest }) {
   return (
@@ -28,7 +32,10 @@ function Button(props) {
     setColor((Math.random() * 0xffffff) | 0);
   };
 
-  // const gltf = useLoader(GLTFLoader, "../TryModel/show_04_4k.gltf");
+  const gltf = useLoader(
+    GLTFLoader,
+    "https://arjs-cors-proxy.herokuapp.com/https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/scene.gltf"
+  );
 
   return (
     <Interactive
@@ -43,9 +50,9 @@ function Button(props) {
         {...props}
       >
         <Suspense fallback={null}>
-          {/* <primitive object={gltf.scene} /> */}
+          <primitive object={gltf.scene} />
 
-          <Model />
+          {/* <Model /> */}
           {/* <Text
             position={[0, 0, 0.06]}
             fontSize={0.05}
@@ -61,7 +68,7 @@ function Button(props) {
   );
 }
 
-export default function Modeler() {
+export default function Modeler({ link }) {
   return (
     <ARCanvas>
       <ambientLight />

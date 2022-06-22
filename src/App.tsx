@@ -41,7 +41,7 @@ function App() {
               />
             }
           />
-          <Route path="/modeler" element={<Modeler />} />
+          <Route path="/modeler" element={<Modeler link={link} />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
