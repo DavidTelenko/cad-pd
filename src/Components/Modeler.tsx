@@ -45,7 +45,7 @@ function Button(props: any) {
         <Suspense fallback={null}>
           {/* <primitive object={gltf.scene} /> */}
 
-          <Model />
+          {/* <Model /> */}
           {/* <Text
             position={[0, 0, 0.06]}
             fontSize={0.05}
