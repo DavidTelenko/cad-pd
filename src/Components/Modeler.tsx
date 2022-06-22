@@ -4,6 +4,8 @@
 import React, { Suspense, useState } from "react";
 import { DefaultXRControllers, ARCanvas, Interactive } from "@react-three/xr";
 // import { Text } from "@react-three/drei";
+import { useLoader } from "@react-three/fiber";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 function Box({ color, size, scale, children, ...rest }: any) {
   return (
@@ -23,6 +25,8 @@ function Button(props: any) {
     setColor((Math.random() * 0xffffff) | 0);
   };
 
+  const gltf = useLoader(GLTFLoader, "../TryModel/show_04_4k.gltf");
+
   return (
     <Interactive
       onHover={() => setHover(true)}
@@ -36,6 +40,7 @@ function Button(props: any) {
         {...props}
       >
         <Suspense fallback={null}>
+          <primitive object={gltf.scene} />
           {/* <Text
             position={[0, 0, 0.06]}
             fontSize={0.05}
