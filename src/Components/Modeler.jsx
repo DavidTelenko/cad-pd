@@ -47,7 +47,7 @@ function Button(props) {
         color={color}
         // scale={hover ? [0.6, 0.6, 0.6] : [0.5, 0.5, 0.5]}
         scale={[0.08, 0.08, 0.08]}
-        size={[0.1, 0.1, 0.1]}
+        size={[0.03, 0.03, 0.03]}
         {...props}
       >
         <Suspense fallback={null}>
