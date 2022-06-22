@@ -8,6 +8,7 @@ import NotFound from "./Components/NotFound";
 
 function App() {
   const [selectedFile, setSelectedFile] = useState<File | undefined>();
+  const [link, setLink] = useState<string>("");
 
   const changeHandler = (event: ChangeEvent) => {
     const target = event.target as HTMLInputElement;
@@ -15,8 +16,16 @@ function App() {
       setSelectedFile(target.files[0]);
     }
   };
+
+  const linkHandler = (event: ChangeEvent) => {
+    const target = event.target as HTMLInputElement;
+    if (target.value) {
+      setLink(target.value);
+    }
+  };
   //
   useEffect(() => console.log(selectedFile), [selectedFile]);
+  useEffect(() => console.log(link), [link]);
 
   return (
     <div className="App">
@@ -28,6 +37,7 @@ function App() {
               <FileUploader
                 selectedFile={selectedFile}
                 changeHandler={changeHandler}
+                linkHandler={linkHandler}
               />
             }
           />

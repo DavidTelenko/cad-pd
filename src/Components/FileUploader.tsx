@@ -22,9 +22,14 @@ const useStyles = makeStyles({
 type FileUploaderProps = {
   selectedFile: File | undefined;
   changeHandler: (event: ChangeEvent) => void;
+  linkHandler: (event: ChangeEvent) => void;
 };
 
-const FileUploader = ({ selectedFile, changeHandler }: FileUploaderProps) => {
+const FileUploader = ({
+  selectedFile,
+  changeHandler,
+  linkHandler,
+}: FileUploaderProps) => {
   const classes = useStyles();
 
   const [value, setValue] = useState<number | number[]>(2.5);
@@ -36,29 +41,6 @@ const FileUploader = ({ selectedFile, changeHandler }: FileUploaderProps) => {
   return (
     <>
       <div className="FileUploader">
-        {/* <>
-          <input
-            type="file"
-            name="file"
-            onChange={(e) => changeHandler(e)}
-            accept=".gltf,.glb"
-          />
-          {selectedFile ? (
-            <div>
-              <p>Filename: {selectedFile.name}</p>
-              <p>Filetype: {selectedFile.type}</p>
-              <p>Size in bytes: {selectedFile.size}</p>
-              <p>
-                lastModifiedDate: {selectedFile.lastModified.toLocaleString()}
-              </p>
-            </div>
-          ) : (
-            <p>Select a file to show details</p>
-          )}
-          <div>
-            <button onClick={handleSubmission}>Submit</button>
-          </div>
-        </> */}
         <FormControl className={classes.margin}>
           <InputLabel htmlFor="input-with-icon-adornment">
             Upload GLTF/GLB file
@@ -91,6 +73,7 @@ const FileUploader = ({ selectedFile, changeHandler }: FileUploaderProps) => {
             inputProps={{
               pattern: ".+.gltf|.+.glb",
             }}
+            onChange={linkHandler}
           />
         </FormControl>
         <div className={classes.root}>
