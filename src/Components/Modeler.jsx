@@ -52,7 +52,6 @@ function Button(props) {
       >
         <Suspense fallback={null}>
           <primitive object={gltf.scene} />
-          <primitive object={gltf.scene} />
 
           {/* <Model /> */}
           {/* <Text
@@ -76,6 +75,7 @@ export default function Modeler({ link }) {
       <ambientLight />
       <pointLight position={[10, 10, 10]} />
       <Button position={[0, 0.1, -0.2]} />
+      <Button position={[0, 0.1, 0.2]} />
       <DefaultXRControllers />
     </ARCanvas>
   );
