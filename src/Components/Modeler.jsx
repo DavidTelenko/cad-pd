@@ -10,41 +10,59 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 // import { extend } from "react-three-fiber";
 import Model from "./Model";
 
+// <ARCanvas>
+//   <ambientLight />
+//   <pointLight position={[10, 10, 10]} />
+//   <Button position={[0, 0.5, -0.2]} />
+//   <Button position={[0, -0.5, 0.2]} />
+//   <DefaultXRControllers />
+// </ARCanvas>
+// <a-scene embedded arjs>
+//   <a-marker id="asset" preset="hiro">
+//     <a-box
+//       position="0 0 0"
+//       scale={1.0}
+//       gltf-model="https://arjs-cors-proxy.herokuapp.com/https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/scene.gltf"
+//     ></a-box>
+//   </a-marker>
+//   <a-entity camera></a-entity>
+// </a-scene>
+
 // type ModelProps = {
 //   link: string,
 // };
 
-function Box({ size, scale, children, ...rest }) {
-  const boxRef = useRef();
+// function Box({ size, scale, children, ...rest }) {
+//   const boxRef = useRef();
 
-  useFrame(() => {
-    boxRef.current.rotation.y += 0.01;
-  });
+//   useFrame(() => {
+//     boxRef.current.rotation.y += 0.01;
+//   });
 
-  return (
-    <mesh
-      scale={scale}
-      ref={boxRef}
-      rotation-x={Math.PI * 0.25}
-      rotation-y={Math.PI * 0.25}
-      {...rest}
-    >
-      {/* <textGeometry args={["test", { font, size: 5, height: 1 }]} /> */}
-      <boxBufferGeometry attach="geometry" args={size} />
-      <meshPhongMaterial attach="material" />
-      {children}
-    </mesh>
-  );
-}
-
-// function Box() {
 //   return (
-//     <mesh>
-//       <boxBufferGeometry args={[1, 1, 1]} />
-//       <meshStandardMaterial color={"hotpink"} />
+//     <mesh
+//       scale={scale}
+//       ref={boxRef}
+//       rotation-x={Math.PI * 0.25}
+//       rotation-y={Math.PI * 0.25}
+//       {...rest}
+//     >
+//       {/* <textGeometry args={["test", { font, size: 5, height: 1 }]} /> */}
+//       <boxBufferGeometry attach="geometry" args={size} />
+//       <meshPhongMaterial attach="material" />
+//       {children}
 //     </mesh>
 //   );
 // }
+
+function Box() {
+  return (
+    <mesh>
+      <boxBufferGeometry args={[1, 1, 1]} />
+      <meshStandardMaterial color={"hotpink"} />
+    </mesh>
+  );
+}
 
 function Target(props) {
   const gltf = useLoader(
@@ -54,24 +72,12 @@ function Target(props) {
 
   return (
     <Box
-      // scale={hover ? [0.6, 0.6, 0.6] : [0.5, 0.5, 0.5]}
-      scale={0.007} //{[0.08, 0.08, 0.08]}
+      // scale={0.007} //{[0.08, 0.08, 0.08]}
       size={[0.03, 0.03, 0.03]}
       {...props}
     >
       <Suspense fallback={null}>
         <primitive object={gltf.scene} />
-
-        {/* <Model /> */}
-        {/* <Text
-            position={[0, 0, 0.06]}
-            fontSize={0.05}
-            color="#000"
-            anchorX="center"
-            anchorY="middle"
-          >
-            Hello react-xr!
-          </Text> */}
       </Suspense>
     </Box>
   );
@@ -79,31 +85,13 @@ function Target(props) {
 
 export default function Modeler({ link }) {
   return (
-    // <ARCanvas>
-    //   <ambientLight />
-    //   <pointLight position={[10, 10, 10]} />
-    //   <Button position={[0, 0.5, -0.2]} />
-    //   <Button position={[0, -0.5, 0.2]} />
-    //   <DefaultXRControllers />
-    // </ARCanvas>
-    // <a-scene embedded arjs>
-    //   <a-marker id="asset" preset="hiro">
-    //     <a-box
-    //       position="0 0 0"
-    //       scale={1.0}
-    //       gltf-model="https://arjs-cors-proxy.herokuapp.com/https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/scene.gltf"
-    //     ></a-box>
-    //   </a-marker>
-    //   <a-entity camera></a-entity>
-    // </a-scene>
     <ARCanvas
+      camera={{ position: [0, 0, 0] }}
       gl={{
         antialias: false,
         powerPreference: "default",
         physicallyCorrectLights: true,
       }}
-      onCameraStreamReady={() => console.log("Camera stream ready")}
-      onCameraStreamError={() => console.error("Camera stream error")}
       onCreated={({ gl }) => {
         gl.setSize(window.innerWidth, window.innerHeight);
       }}
@@ -113,13 +101,15 @@ export default function Modeler({ link }) {
       <ARMarker
         params={{ smooth: true }}
         type={"pattern"}
-        patternUrl={"../public/patt.hiro"}
+        patternUrl={"../public/hiro.patt"}
         onMarkerFound={() => {
           console.log("Marker Found");
         }}
       >
-        {/* <Box /> */}
-        <Target position={[0, -0.5, 0.2]} />
+        <mesh>
+          <boxBufferGeometry args={[1, 1, 1]} />
+          <meshStandardMaterial color={"green"} />
+        </mesh>
       </ARMarker>
     </ARCanvas>
   );
