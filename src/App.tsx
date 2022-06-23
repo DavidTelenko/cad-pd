@@ -14,6 +14,7 @@ function App() {
     const target = event.target as HTMLInputElement;
     if (target.files) {
       setSelectedFile(target.files[0]);
+      console.log(target.value);
     }
   };
 
