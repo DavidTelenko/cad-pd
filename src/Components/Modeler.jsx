@@ -1,10 +1,10 @@
 // import { Canvas, useFrame } from "react-three-fiber";
 // import { Stats, OrbitControls } from "@react-three/drei";
 // // import * as three from "three";
-import React, { Suspense, useState } from "react";
+import React, { Suspense, useState, useRef } from "react";
 import { DefaultXRControllers, ARCanvas, Interactive } from "@react-three/xr";
 import { Text, useGLTF } from "@react-three/drei";
-import { useLoader } from "@react-three/fiber";
+import { useLoader, useFrame } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 // import { extend } from "react-three-fiber";
 import Model from "./Model";
@@ -14,8 +14,20 @@ import Model from "./Model";
 // };
 
 function Box({ color, size, scale, children, ...rest }) {
+  const boxRef = useRef();
+
+  useFrame(() => {
+    boxRef.current.rotation.y += 0.01;
+  });
+
   return (
-    <mesh scale={scale} {...rest}>
+    <mesh
+      scale={scale}
+      ref={boxRef}
+      rotation-x={Math.PI * 0.25}
+      rotation-y={Math.PI * 0.25}
+      {...rest}
+    >
       {/* <textGeometry args={["test", { font, size: 5, height: 1 }]} /> */}
       <boxBufferGeometry attach="geometry" args={size} />
       <meshPhongMaterial attach="material" color={color} />
@@ -46,7 +58,7 @@ function Button(props) {
       <Box
         color={color}
         // scale={hover ? [0.6, 0.6, 0.6] : [0.5, 0.5, 0.5]}
-        scale={[0.08, 0.08, 0.08]}
+        scale={0.07} //{[0.08, 0.08, 0.08]}
         size={[0.03, 0.03, 0.03]}
         {...props}
       >
@@ -74,8 +86,8 @@ export default function Modeler({ link }) {
     <ARCanvas>
       <ambientLight />
       <pointLight position={[10, 10, 10]} />
-      <Button position={[0, 0.1, -0.2]} />
-      <Button position={[0, 0.1, 0.2]} />
+      <Button position={[0, 0.5, -0.2]} />
+      <Button position={[0, -0.5, 0.2]} />
       <DefaultXRControllers />
     </ARCanvas>
   );
