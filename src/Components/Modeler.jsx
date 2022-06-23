@@ -52,6 +52,7 @@ function Button(props) {
       >
         <Suspense fallback={null}>
           <primitive object={gltf.scene} />
+          <primitive object={gltf.scene} />
 
           {/* <Model /> */}
           {/* <Text
