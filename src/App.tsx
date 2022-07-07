@@ -8,7 +8,7 @@ import NotFound from "./Components/NotFound";
 
 function App() {
   const [selectedFile, setSelectedFile] = useState<File | undefined>();
-  const [link, setLink] = useState<string>("");
+  const [selectedLink, setLink] = useState<string>("");
 
   const changeHandler = (event: ChangeEvent) => {
     const target = event.target as HTMLInputElement;
@@ -26,7 +26,7 @@ function App() {
   };
   //
   useEffect(() => console.log(selectedFile), [selectedFile]);
-  useEffect(() => console.log(link), [link]);
+  useEffect(() => console.log(selectedLink), [selectedLink]);
 
   return (
     <div className="App">
@@ -37,12 +37,13 @@ function App() {
             element={
               <FileUploader
                 selectedFile={selectedFile}
+                selectedLink={selectedLink}
                 changeHandler={changeHandler}
                 linkHandler={linkHandler}
               />
             }
           />
-          <Route path="/modeler" element={<Modeler link={link} />} />
+          <Route path="/modeler" element={<Modeler link={selectedLink} />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
