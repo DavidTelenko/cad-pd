@@ -1,0 +1,32 @@
+.rect {
+    background-color: black;
+    width: 15px;
+    height: 15px;
+}
+
+.rect:hover {
+    border: 2px solid black;
+    background-color: #ffe48c;
+    width: 11px;
+    height: 11px;
+}
+
+.decVert {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 65px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.decHor {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 65px;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+}
