@@ -16,19 +16,16 @@ import MarkersUploader from './Components/MarkersUploader';
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-          CAD-AR {'>'} Upload Files
-      </header>
-      {/* <FileUploadForm/> */}
-      <DecVert classNameProp='decVert'/>
-      <DecVert classNameProp='decHor'/>
+      <DecVert classNameProp='decVert' />
+      <DecVert classNameProp='decHor' />
 
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Main />} />
-          <Route path="/fileuploader" element={<FileUploadForm />} />
-          <Route path="/markeruploader" element={<MarkersUploader />} />
-          <Route path="/cadar" element={<CadAr />} />
+          <Route path="/model-uploader" element={<FileUploadForm />} />
+          <Route path="/marker-uploader" element={<MarkersUploader />} />
+          <Route path="/cad-ar" element={<CadAr />} />
+          <Route path="/continue-or-repeat" element={<CadAr />} />
         </Routes>
       </BrowserRouter>
     </div>

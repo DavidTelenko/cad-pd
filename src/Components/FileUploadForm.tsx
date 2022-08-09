@@ -5,11 +5,23 @@ import "../Styles/FileUploadForm.css";
 
 const FileUploadForm = () => {
     return (
-    <div className="fileUploadForm">
-        <input className="int-uplloader upload" type="file" placeholder="Upload file"/>
-        <input className="int-uplloader upload" type="text" placeholder="Enter a link"/>
-        <Link to="/markeruploader"><button className="upload upload-button">Lets go</button></Link>
-    </div>
+        <div className="fileUploadForm">
+            <header className="App-header">
+                CAD-AR / Model upload
+            </header>
+            <input className="int-uploader upload"
+                type="file"
+                placeholder="Upload file"
+
+            />
+            <input className="int-uploader upload"
+                type="text"
+                placeholder="Enter a link"
+            />
+            <Link to="/marker-uploader">
+                <button className="upload upload-button">Let's go</button>
+            </Link>
+        </div>
     );
 }
 
