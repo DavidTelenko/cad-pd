@@ -1,14 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Home, { HomeProperties } from "./Home";
 
 import "../Styles/FileUploadForm.css";
 
-const Main = () => {
+const Main = (props: HomeProperties) => {
     return (
         <div>
-            <header className="App-header">
-                CAD-AR / Let's start
-            </header>
+            <Home pathName={props.pathName} />
             <Link to="/model-uploader">
                 <button className="upload upload-button">Let's start!</button>
             </Link>

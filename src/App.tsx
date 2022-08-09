@@ -11,7 +11,7 @@ import {
 import './Styles/App.css';
 import Main from './Components/Main';
 import CadAr from './Components/CadAr';
-import MarkersUploader from './Components/MarkersUploader';
+import MarkerUploader from './Components/MarkerUploader';
 
 function App() {
   return (
@@ -21,11 +21,10 @@ function App() {
 
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="/model-uploader" element={<FileUploadForm />} />
-          <Route path="/marker-uploader" element={<MarkersUploader />} />
+          <Route path="/" element={<Main pathName="Home" />} />
+          <Route path="/model-uploader" element={<FileUploadForm pathName="Model uploader" />} />
+          <Route path="/marker-uploader" element={<MarkerUploader pathName="Marker uploader" />} />
           <Route path="/cad-ar" element={<CadAr />} />
-          <Route path="/continue-or-repeat" element={<CadAr />} />
         </Routes>
       </BrowserRouter>
     </div>

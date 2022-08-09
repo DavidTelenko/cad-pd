@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import "../Styles/FileUploadForm.css";
+import Home, { HomeProperties } from "./Home";
 
-const MarkersUploader = () => {
+const MarkerUploader = (props: HomeProperties) => {
+    const [marker, setMarker] = useState<string[]>();
+
     return (
         <div className="fileUploadForm">
-            <header className="App-header">
-                CAD-AR / Marker upload
-            </header>
+            <Home pathName={props.pathName} />
             <input className="int-uploader upload" type="file" placeholder="Upload file" />
             <Link to="/cad-ar">
                 <button className="upload upload-button">Im Ok</button>
@@ -20,4 +21,4 @@ const MarkersUploader = () => {
     );
 }
 
-export default MarkersUploader;
+export default MarkerUploader;
