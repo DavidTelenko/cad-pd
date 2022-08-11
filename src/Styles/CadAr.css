@@ -1,0 +1,63 @@
+.canvas {
+
+}
+
+#arjs-video {
+    all: unset;
+    object-fit: contain;
+    position: absolute;
+    max-width: 100%;
+    height: auto;
+    margin: unset !important;
+    left: unset !important;
+    /* z-index: 100 !important; */
+}
+
+@media screen and (min-width: 250px) {
+    #arjs-video {
+      max-width: 250px;
+      margin-left: 0;
+      left: unset;
+    }
+  }
+  
+  @media screen and (min-width: 350px) {
+    #arjs-video {
+      max-width: 340px;
+      margin-left: 0;
+      left: unset;
+    }
+  }
+  
+  @media screen and (min-width: 375px) {
+    #arjs-video {
+      max-width: 340px;
+      margin-left: 0;
+      left: unset;
+    }
+  }
+  
+  @media screen and (min-width: 400px) {
+    #arjs-video {
+      max-width: 380px;
+      margin-left: 0;
+      left: unset;
+    }
+  }
+  
+  @media screen and (min-width: 700px) {
+    #arjs-video {
+      max-width: 700px;
+      margin-left: 0;
+      left: unset;
+    }
+  }
+  
+  @media screen and (min-width: 1100px) {
+    #arjs-video {
+      max-width: 900px;
+      margin-left: 0;
+      left: unset;
+    }
+  }
+  
