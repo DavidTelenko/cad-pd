@@ -1,8 +1,5 @@
-.canvas {
-
-}
-
-#arjs-video {
+#arjs-video,
+canvas {
     all: unset;
     object-fit: contain;
     position: absolute;
@@ -15,50 +12,85 @@
 }
 
 @media screen and (min-width: 250px) {
-    #arjs-video {
-      max-width: 250px;
-      margin-left: 0;
-      left: unset;
+
+    #arjs-video,
+    canvas {
+        max-width: 250px;
+        margin-left: 0;
+        left: unset;
     }
-  }
-  
-  @media screen and (min-width: 350px) {
-    #arjs-video {
-      max-width: 340px;
-      margin-left: 0;
-      left: unset;
+
+    canvas {
+        height: 95vh !important;
     }
-  }
-  
-  @media screen and (min-width: 375px) {
-    #arjs-video {
-      max-width: 340px;
-      margin-left: 0;
-      left: unset;
+}
+
+@media screen and (min-width: 350px) {
+
+    #arjs-video,
+    canvas {
+        max-width: 340px;
+        margin-left: 0;
+        left: unset;
     }
-  }
-  
-  @media screen and (min-width: 400px) {
-    #arjs-video {
-      max-width: 380px;
-      margin-left: 0;
-      left: unset;
+
+    canvas {
+        height: 95vh !important;
     }
-  }
-  
-  @media screen and (min-width: 700px) {
-    #arjs-video {
-      max-width: 700px;
-      margin-left: 0;
-      left: unset;
+}
+
+@media screen and (min-width: 375px) {
+
+    #arjs-video,
+    canvas {
+        max-width: 340px;
+        margin-left: 0;
+        left: unset;
     }
-  }
-  
-  @media screen and (min-width: 1100px) {
-    #arjs-video {
-      max-width: 900px;
-      margin-left: 0;
-      left: unset;
+
+    canvas {
+        height: 87vh !important;
     }
-  }
-  
+}
+
+@media screen and (min-width: 400px) {
+
+    #arjs-video,
+    canvas {
+        max-width: 380px;
+        margin-left: 0;
+        left: unset;
+    }
+
+    canvas {
+        height: 90vh !important;
+    }
+}
+
+@media screen and (min-width: 700px) {
+
+    #arjs-video,
+    canvas {
+        max-width: 700px;
+        margin-left: 0;
+        left: unset;
+    }
+
+    canvas {
+        height: 500px !important;
+    }
+}
+
+@media screen and (min-width: 1100px) {
+
+    #arjs-video,
+    canvas {
+        max-width: 900px;
+        margin-left: 0;
+        left: unset;
+    }
+
+    canvas {
+        height: 700px !important;
+    }
+}
