@@ -1,5 +1,3 @@
-import React from "react";
-
 import { ARCanvas, ARMarker } from "@artcom/react-three-arjs";
 
 import "../Styles/CadAr.css";
