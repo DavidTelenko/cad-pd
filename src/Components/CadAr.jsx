@@ -8,16 +8,16 @@ const CadAr = () => {
         camera={{ position: [0, 0, 0] }}
         dpr={window.devicePixelRatio}
         onCreated={({ gl }) => {
-          gl.setSize(window.innerWidth, window.innerHeight);
+            gl.setSize(window.innerWidth, window.innerHeight);
         }}
-      >
+    >
         <ambientLight />
         <pointLight position={[10, 10, 0]} />
         <ARMarker type={"pattern"} patternUrl={"data/hiro.patt"}>
-          <mesh>
-            <boxBufferGeometry args={[1, 1, 1]} />
-            <meshStandardMaterial color={"green"} />
-          </mesh>
+            <mesh>
+                <boxBufferGeometry args={[1, 1, 1]} />
+                <meshStandardMaterial color={"green"} />
+            </mesh>
         </ARMarker>
         {/* <ARMarker type={"barcode"} value={"6"}>
           <mesh>
@@ -25,7 +25,7 @@ const CadAr = () => {
             <meshStandardMaterial color={"green"} />
           </mesh>
         </ARMarker> */}
-      </ARCanvas>);
+    </ARCanvas>);
 }
 
 export default CadAr;
