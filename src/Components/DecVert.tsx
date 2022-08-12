@@ -4,12 +4,14 @@ interface DecProps {
     classNameProp: string;
 }
 
-const DecVert = ({classNameProp} : DecProps) => {
-    return (<div className={classNameProp}>
-        <div className='rect'></div>
-        <div className='rect'></div>
-        <div className='rect'></div>
-    </div>)
+const DecVert = ({ classNameProp }: DecProps) => {
+    return (
+        <div className={classNameProp}>
+            <div className='rect'></div>
+            <div className='rect'></div>
+            <div className='rect'></div>
+        </div>
+    )
 }
 
 export default DecVert;
