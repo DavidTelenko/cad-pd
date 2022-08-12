@@ -21,14 +21,18 @@ const App = () => {
 
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Main pathName="Home" />} />
+          <Route path="/" element={
+            <Main pathName="Home" />
+          } />
           <Route path="/model-uploader" element={
             <ModelUploader pathName="Model uploader" />
           } />
           <Route path="/marker-uploader" element={
             <MarkerUploader pathName="Marker uploader" />
           } />
-          <Route path="/cad-ar" element={<CadAr />} />
+          <Route path="/cad-ar" element={
+            <CadAr pathName="Camera" />
+          } />
         </Routes>
       </BrowserRouter>
     </div>
