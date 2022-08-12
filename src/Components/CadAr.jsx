@@ -21,6 +21,12 @@ const CadAr = () => {
             <meshStandardMaterial color={"green"} />
           </mesh>
         </ARMarker>
+        {/* <ARMarker type={"barcode"} value={"6"}>
+          <mesh>
+            <boxBufferGeometry args={[1, 1, 1]} />
+            <meshStandardMaterial color={"green"} />
+          </mesh>
+        </ARMarker> */}
       </ARCanvas>);
 }
 
