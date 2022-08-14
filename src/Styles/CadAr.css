@@ -1,3 +1,11 @@
+/* #arjs-video {
+    z-index: 150 !important;
+}
+
+canvas {
+    z-index: 200 !important;
+} */
+
 #arjs-video,
 canvas {
     all: unset;
