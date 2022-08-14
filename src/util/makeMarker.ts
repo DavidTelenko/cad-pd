@@ -6,22 +6,32 @@ export const encodeImageURL = (
     //
     let image = new Image();
     image.onload = () => {
-        let patternFileString = encodeImage(image)
-        onComplete(patternFileString)
+        // let patternFileString = encodeImage(image);
+        // onComplete(patternFileString);
     }
     image.src = imageURL;
-}
+};
 
-export const encodeImage = (image: HTMLImageElement): string => {
+export const encodeImage = (url: string, imageDat?: ImageData, image?: HTMLImageElement): string => {
     // copy image on canvas
     let canvas = document.createElement('canvas');
     let context = canvas.getContext('2d');
     let patternFileString = "";
 
+    const img = new Image();
+
+    img.crossOrigin = "Anonymous";
+    img.src = url;
+
     if (!context) return patternFileString;
 
     canvas.width = 16;
     canvas.height = 16;
+
+    img.onload = () => {
+        canvas.width = img.width;
+        canvas.height = img.height;
+    }
 
     // document.body.appendChild(canvas)
     // canvas.style.width = '200px'
@@ -32,7 +42,7 @@ export const encodeImage = (image: HTMLImageElement): string => {
         context.clearRect(0, 0, canvas.width, canvas.height);
         context.translate(canvas.width / 2, canvas.height / 2);
         context.rotate(orientation);
-        context.drawImage(image,
+        context.drawImage(img,
             -canvas.width / 2, -canvas.height / 2,
             canvas.width, canvas.height);
         context.restore();
@@ -62,8 +72,8 @@ export const encodeImage = (image: HTMLImageElement): string => {
         }
     }
 
-    return patternFileString
-}
+    return patternFileString;
+};
 
 export const triggerDownload = (
     patternFileString: string,
@@ -78,9 +88,9 @@ export const triggerDownload = (
         }));
 
     domElement.download = fileName;
-    document.body.appendChild(domElement)
+    document.body.appendChild(domElement);
     domElement.click();
-    document.body.removeChild(domElement)
+    document.body.removeChild(domElement);
 }
 
 export const buildFullMarker = (
@@ -115,7 +125,7 @@ export const buildFullMarker = (
             canvas.width * (1 - 2 * margin),
             canvas.height * (1 - 2 * margin)
         );
-    }
+    };
 
     // copy image on canvas
     prepareContext(color, whiteMargin);
@@ -141,4 +151,4 @@ export const buildFullMarker = (
     });
 
     innerImage.src = innerImageURL;
-}
+};
