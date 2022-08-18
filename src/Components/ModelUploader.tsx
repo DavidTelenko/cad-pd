@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Home, { HomeProperties } from "./Home"
-import Slider from '@mui/material/Slider'
-import TextField from '@mui/material/TextField';
+import { Slider, TextField } from '@mui/material'
 
 import pushItem from "../util/pushItem";
 
@@ -23,7 +22,7 @@ const ModelUploader = (props: HomeProperties) => {
     const onLinkChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
         const link: string = e.target.value;
-        const linkPatt: RegExp = /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/gm;
+        const linkPatt: RegExp = /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*)$/gm;
         setLink(link);
         setIsLinkCorrect(linkPatt.test(link));
     };
@@ -31,7 +30,7 @@ const ModelUploader = (props: HomeProperties) => {
     const onAddModel = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         if (model) {
             pushItem("models", model);
-            pushItem("links", URL.createObjectURL(model)); // FIXME rel path is a lie
+            pushItem("links", URL.createObjectURL(model));
         }
         else {
             pushItem("links", link);

@@ -6,32 +6,22 @@ export const encodeImageURL = (
     //
     let image = new Image();
     image.onload = () => {
-        // let patternFileString = encodeImage(image);
-        // onComplete(patternFileString);
+        let patternFileString = encodeImage(image);
+        onComplete(patternFileString);
     }
     image.src = imageURL;
 };
 
-export const encodeImage = (url: string, imageDat?: ImageData, image?: HTMLImageElement): string => {
+export const encodeImage = (image: HTMLImageElement): string => {
     // copy image on canvas
     let canvas = document.createElement('canvas');
     let context = canvas.getContext('2d');
     let patternFileString = "";
 
-    const img = new Image();
-
-    img.crossOrigin = "Anonymous";
-    img.src = url;
-
     if (!context) return patternFileString;
 
     canvas.width = 16;
     canvas.height = 16;
-
-    img.onload = () => {
-        canvas.width = img.width;
-        canvas.height = img.height;
-    }
 
     // document.body.appendChild(canvas)
     // canvas.style.width = '200px'
@@ -42,7 +32,7 @@ export const encodeImage = (url: string, imageDat?: ImageData, image?: HTMLImage
         context.clearRect(0, 0, canvas.width, canvas.height);
         context.translate(canvas.width / 2, canvas.height / 2);
         context.rotate(orientation);
-        context.drawImage(img,
+        context.drawImage(image,
             -canvas.width / 2, -canvas.height / 2,
             canvas.width, canvas.height);
         context.restore();

@@ -8,63 +8,71 @@ import indexedDB from "localforage";
 
 import "../Styles/CadAr.css";
 
-function Box({ color, size, scale, children, ...rest }) {
+// const Box = ({ color, size, scale, children, ...rest }) => {
+//     return (
+//         <mesh scale={scale} {...rest}>
+//             <boxBufferGeometry attach="geometry" args={size} />
+//             <meshPhongMaterial attach="material" color={color} />
+//             {children}
+//         </mesh>
+//     );
+// }
+
+const Model = ({ gltfLink, scale, size, color, ...rest }) => {
+    const gltf = useLoader(
+        GLTFLoader,
+        gltfLink
+        // "https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/scene.gltf"
+    );
+
     return (
+        // <Box
+        //     scale={[0.08, 0.08, 0.08]}
+        //     size={[0.03, 0.03, 0.03]}
+        //     {...props}
+        // >
+        //     <Suspense fallback={null}>
+        //         <primitive object={gltf.scene} />
+        //     </Suspense>
+        // </Box>
         <mesh scale={scale} {...rest}>
-            <boxBufferGeometry attach="geometry" args={size} />
-            <meshPhongMaterial attach="material" color={color} />
-            {children}
+            <Suspense fallback={null}>
+                <primitive object={gltf.scene} />
+            </Suspense>
         </mesh>
     );
 }
 
-const Model = ({ gltfLink, props }) => {
-    const gltf = useLoader(
-        GLTFLoader,
-        // "https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/scene.gltf"
-        gltfLink
-    );
-
-    return (
-        <Box
-            scale={[0.08, 0.08, 0.08]}
-            size={[0.03, 0.03, 0.03]}
-            {...props}
-        >
-            <Suspense fallback={null}>
-                <primitive object={gltf.scene} />
-            </Suspense>
-        </Box>
-    );
-}
-
-const CadAr = (props) => {
-    const [links, setLinks] = useState();
-    const [patts, setPatts] = useState();
+const CadAr = () => {
+    const [modelLinks, setModelLinks] = useState();
     const [pattUrls, setPattUrls] = useState();
+    const [scales, setScales] = useState();
 
     useEffect(() => {
-        indexedDB.getItem("links", (_err, val) => {
-            setLinks(val);
-            console.log(val);
-        });
-        indexedDB.getItem("patts", (_err, val) => {
-            setPatts(val);
-            console.log(val);
-        });
-    }, []);
+        (() => {
+            indexedDB.getItem("links", (err, val) => {
+                if (!err) setModelLinks(val);
+            });
+            indexedDB.getItem("markers", (err, val) => {
+                if (!err) setPattUrls(val.map(e => e.url));
+            });
+            indexedDB.getItem("scales", (err, val) => {
+                if (!err) setScales(val);
+            });
+        })();
+    });
 
-    useEffect(() => {
-        if (patts) setPattUrls(patts.map(el => {
-            if (el.length) {
-                const array = new Uint8Array(el.length);
-                for (let i = 0; i < el.length; i++) {
-                    array[i] = el.charCodeAt(i);
-                }
-                URL.createObjectURL(new Blob([array], { type: "text/patt" }));
-            }
-        }));
-    }, [patts]);
+    // useEffect(() => {
+    //     if (patts) setPattUrls(patts.map(el => {
+    //         if (el.length) {
+    //             const array = new Uint8Array(el.length);
+    //             for (let i = 0; i < el.length; i++) {
+    //                 array[i] = el.charCodeAt(i);
+    //             }
+    //             URL.createObjectURL(new Blob([array], { type: "text/patt" }));
+    //         }
+    //     }));
+    // }, [patts]);
 
     return (
         <ARCanvas
@@ -78,13 +86,15 @@ const CadAr = (props) => {
             <ambientLight />
             <pointLight position={[10, 10, 0]} />
             {
-                links && patts && links.map((link, index) =>
+                modelLinks && pattUrls && modelLinks.map((link, index) =>
                 (<ARMarker type={"pattern"}
-                    patternUrl={URL.createObjectURL(patts[index])}
+                    patternUrl={pattUrls[index]}
                     key={index}>
-                    <Model gltfLink={link} position={[0, 0.1, 0.2]} />
-                </ARMarker>)
-                )
+                    <Model gltfLink={link}
+                        scale={scales[index]}
+                        position={[0, 0, 0]}
+                    />
+                </ARMarker>))
             }
         </ARCanvas>
     );

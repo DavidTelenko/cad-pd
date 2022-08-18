@@ -31,7 +31,7 @@ const App = () => {
             <MarkerUploader pathName="Marker uploader" />
           } />
           <Route path="/cad-ar" element={
-            <CadAr pathName="Camera" />
+            <CadAr />
           } />
         </Routes>
       </BrowserRouter>
