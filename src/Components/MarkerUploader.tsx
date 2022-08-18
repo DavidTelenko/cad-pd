@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, To } from "react-router-dom";
 import Home, { HomeProperties } from "./Home";
 import pushItem from "../util/pushItem";
-import { Slider } from '@mui/material';
+import { Button, Slider } from '@mui/material';
 import FileChooser from "./FileChooser";
 import { encodeImage } from "../util/makeMarker";
 
@@ -22,12 +22,13 @@ const MarkerUploaderButton = (props: {
     };
 
     return (
-        <Link to={props.linkTo}>
-            <button className="upload upload-button"
+        <Link className="button-link" to={props.linkTo}>
+            <Button className="inp upload upload-button"
+                variant="contained"
                 disabled={!props.marker || props.disabled}
                 onClick={onMarkerAdd}>
                 {props.message}
-            </button>
+            </Button>
         </Link>
     );
 };
@@ -83,15 +84,15 @@ const MarkerUploader = (props: HomeProperties) => {
                     setMarker(e.target.files?.item(0));
                 }}
             />
-            Pattern Ratio
+            {/* Pattern Ratio
             <Slider defaultValue={0.5}
                 min={0.1}
                 max={0.9}
                 step={0.01}
                 aria-label="Default"
                 valueLabelDisplay="auto"
-            />
-            <MarkerUploaderButton message="I'm Ok"
+            /> */}
+            <MarkerUploaderButton message="Let's CAD-AR"
                 linkTo="/cad-ar"
                 marker={marker}
                 disabled={!pattText} />

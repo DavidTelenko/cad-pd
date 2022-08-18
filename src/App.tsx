@@ -12,30 +12,40 @@ import ModelUploader from './Components/ModelUploader';
 import MarkerUploader from './Components/MarkerUploader';
 
 import './Styles/App.css';
+import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
+
+const darkTheme = createTheme({
+  palette: {
+    // mode: 'dark',
+  },
+});
 
 const App = () => {
   return (
-    <div className="App">
-      <DecVert classNameProp='decVert' />
-      <DecVert classNameProp='decHor' />
+    <MuiThemeProvider theme={darkTheme}>
 
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={
-            <Main pathName="Home" />
-          } />
-          <Route path="/model-uploader" element={
-            <ModelUploader pathName="Model uploader" />
-          } />
-          <Route path="/marker-uploader" element={
-            <MarkerUploader pathName="Marker uploader" />
-          } />
-          <Route path="/cad-ar" element={
-            <CadAr pathName="Camera" />
-          } />
-        </Routes>
-      </BrowserRouter>
-    </div>
+      <div className="App">
+        {/* <DecVert classNameProp='decVert' />
+      <DecVert classNameProp='decHor' /> */}
+
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={
+              <Main pathName="Home" />
+            } />
+            <Route path="/model-uploader" element={
+              <ModelUploader pathName="Model uploader" />
+            } />
+            <Route path="/marker-uploader" element={
+              <MarkerUploader pathName="Marker uploader" />
+            } />
+            <Route path="/cad-ar" element={
+              <CadAr pathName="Camera" />
+            } />
+          </Routes>
+        </BrowserRouter>
+      </div>
+    </MuiThemeProvider>
   );
 }
 

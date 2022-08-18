@@ -4,6 +4,9 @@ import { ARCanvas, ARMarker } from "@artcom/react-three-arjs";
 import { useLoader } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
+import { Button } from "@mui/material";
+import { Link } from "react-router-dom";
+
 import indexedDB from "localforage";
 
 import "../Styles/CadAr.css";
@@ -67,26 +70,34 @@ const CadAr = (props) => {
     }, [patts]);
 
     return (
-        <ARCanvas
-            className="canvas"
-            camera={{ position: [0, 0, 0] }}
-            dpr={window.devicePixelRatio}
-            onCreated={({ gl }) => {
-                gl.setSize(window.innerWidth, window.innerHeight);
-            }}
-        >
-            <ambientLight />
-            <pointLight position={[10, 10, 0]} />
-            {
-                links && patts && links.map((link, index) =>
-                (<ARMarker type={"pattern"}
-                    patternUrl={URL.createObjectURL(patts[index])}
-                    key={index}>
-                    <Model gltfLink={link} position={[0, 0.1, 0.2]} />
-                </ARMarker>)
-                )
-            }
-        </ARCanvas>
+        <>
+            <Link className="button-link cad-back-home" to="/">
+                <Button variant="contained" className="inp cad-back-home" id="common-button" color="primary">
+                    Home
+                </Button>
+            </Link>
+            <ARCanvas
+                className="canvas"
+                camera={{ position: [0, 0, 0] }}
+                dpr={window.devicePixelRatio}
+                onCreated={({ gl }) => {
+                    gl.setSize(window.innerWidth, window.innerHeight);
+                }}
+            >
+                <ambientLight />
+                <pointLight position={[10, 10, 0]} />
+                {
+                    links && patts && links.map((link, index) =>
+                    (<ARMarker type={"pattern"}
+                        patternUrl={`"data/hiro.patt"`}
+                        // patternUrl={URL.createObjectURL(patts[index])}
+                        key={index}>
+                        <Model gltfLink={link} position={[0, 0.1, 0.2]} />
+                    </ARMarker>)
+                    )
+                }
+            </ARCanvas>
+        </>
     );
 }
 
