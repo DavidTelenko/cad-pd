@@ -11,16 +11,6 @@ import indexedDB from "localforage";
 
 import "../Styles/CadAr.css";
 
-// const Box = ({ color, size, scale, children, ...rest }) => {
-//     return (
-//         <mesh scale={scale} {...rest}>
-//             <boxBufferGeometry attach="geometry" args={size} />
-//             <meshPhongMaterial attach="material" color={color} />
-//             {children}
-//         </mesh>
-//     );
-// }
-
 const Model = ({ gltfLink, scale, size, color, ...rest }) => {
     const gltf = useLoader(
         GLTFLoader,
@@ -29,15 +19,6 @@ const Model = ({ gltfLink, scale, size, color, ...rest }) => {
     );
 
     return (
-        // <Box
-        //     scale={[0.08, 0.08, 0.08]}
-        //     size={[0.03, 0.03, 0.03]}
-        //     {...props}
-        // >
-        //     <Suspense fallback={null}>
-        //         <primitive object={gltf.scene} />
-        //     </Suspense>
-        // </Box>
         <mesh scale={scale} {...rest}>
             <Suspense fallback={null}>
                 <primitive object={gltf.scene} />
@@ -64,18 +45,6 @@ const CadAr = () => {
             });
         })();
     }, [modelLinks]);
-
-    // useEffect(() => {
-    //     if (patts) setPattUrls(patts.map(el => {
-    //         if (el.length) {
-    //             const array = new Uint8Array(el.length);
-    //             for (let i = 0; i < el.length; i++) {
-    //                 array[i] = el.charCodeAt(i);
-    //             }
-    //             URL.createObjectURL(new Blob([array], { type: "text/patt" }));
-    //         }
-    //     }));
-    // }, [patts]);
 
     return (
         <ARCanvas

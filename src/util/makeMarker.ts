@@ -3,7 +3,6 @@ export type OnCompleteCallback = (param: string) => void;
 export const encodeImageURL = (
     imageURL: string,
     onComplete: OnCompleteCallback) => {
-    //
     let image = new Image();
     image.onload = () => {
         let patternFileString = encodeImage(image);
@@ -22,9 +21,6 @@ export const encodeImage = (image: HTMLImageElement): string => {
 
     canvas.width = 16;
     canvas.height = 16;
-
-    // document.body.appendChild(canvas)
-    // canvas.style.width = '200px'
 
     for (let orientation = 0; orientation > -2 * Math.PI; orientation -= Math.PI / 2) {
         // draw on canvas - honor orientation
@@ -68,7 +64,6 @@ export const encodeImage = (image: HTMLImageElement): string => {
 export const triggerDownload = (
     patternFileString: string,
     fileName = 'pattern-marker.patt') => {
-    // tech from https://stackoverflow.com/questions/3665115/create-a-file-in-memory-for-user-to-download-not-through-server
 
     let domElement = window.document.createElement('a');
 
@@ -92,7 +87,6 @@ export const buildFullMarker = (
     // 
     const whiteMargin = 0.1;
     const blackMargin = (1 - 2 * whiteMargin) * ((1 - pattRatio) / 2)
-    // const blackMargin = 0.2
 
     const innerMargin = whiteMargin + blackMargin
 

@@ -11,7 +11,6 @@ const Home = (props: HomeProperties) => {
     return (
         <header className="App-header">
             <Link to="/" className="home-link">CAD-AR</Link> {'>'} {props.pathName}
-            {/*e.g. CAD-AR > Home*/}
         </header>
     );
 }
