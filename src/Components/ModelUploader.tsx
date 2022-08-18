@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Home, { HomeProperties } from "./Home"
 import { Slider, TextField } from '@mui/material'
 
-import pushItem from "../util/pushItem";
+import { pushItem } from "../util/pushItem";
 
 import "../Styles/FileUploadForm.css";
 import FileChooser from "./FileChooser";
@@ -31,7 +31,7 @@ const ModelUploader = (props: HomeProperties) => {
     const onAddModel = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         if (model) {
             pushItem("models", model);
-            pushItem("links", URL.createObjectURL(model));
+            pushItem("links", URL.createObjectURL(model)); // URL.createObjectURL(model)
         }
         else {
             pushItem("links", link);
@@ -49,9 +49,9 @@ const ModelUploader = (props: HomeProperties) => {
             <Home pathName={props.pathName} />
             <div className="input-area">
                 <FileChooser
-                    hint="Upload .GLTF model"
+                    hint="Upload .GLTF / .GLB model"
                     disabled={!!link}
-                    accept=".gltf, .txt"
+                    accept=".gltf, .glb"
                     onChange={onModelChange}
                 />
                 or
@@ -68,14 +68,15 @@ const ModelUploader = (props: HomeProperties) => {
                     onChange={onLinkChange}
                 />
             </div>
-            {/* <Slider defaultValue={0.5}
+            <Slider className="cadar-slider"
+                defaultValue={1.0}
                 min={0.1}
-                max={1.0}
+                max={100.0}
                 step={0.01}
                 aria-label="Default"
                 valueLabelDisplay="auto"
                 onChange={scaleSliderOnChange}
-            /> */}
+            />
             <Link className="button-link" to="/marker-uploader">
                 <Button className="inp button-link"
                     variant="contained"

@@ -23,22 +23,24 @@ const darkTheme = createTheme({
 const App = () => {
   return (
     <MuiThemeProvider theme={darkTheme}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={
-            <Main pathName="Home" />
-          } />
-          <Route path="/model-uploader" element={
-            <ModelUploader pathName="Model uploader" />
-          } />
-          <Route path="/marker-uploader" element={
-            <MarkerUploader pathName="Marker uploader" />
-          } />
-          <Route path="/cad-ar" element={
-            <CadAr />
-          } />
-        </Routes>
-      </BrowserRouter>
+      <div className="App">
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={
+              <Main pathName="Home" />
+            } />
+            <Route path="/model-uploader" element={
+              <ModelUploader pathName="Model uploader" />
+            } />
+            <Route path="/marker-uploader" element={
+              <MarkerUploader pathName="Marker uploader" />
+            } />
+            <Route path="/cad-ar" element={
+              <CadAr />
+            } />
+          </Routes>
+        </BrowserRouter>
+      </div>
     </MuiThemeProvider>
   );
 }

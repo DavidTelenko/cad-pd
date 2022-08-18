@@ -54,16 +54,16 @@ const CadAr = () => {
     useEffect(() => {
         (() => {
             indexedDB.getItem("links", (err, val) => {
-                if (!err) setModelLinks(val);
+                if (!err && val) setModelLinks(val);
             });
             indexedDB.getItem("markers", (err, val) => {
-                if (!err) setPattUrls(val.map(e => e.url));
+                if (!err && val) setPattUrls(val.map(e => e.url));
             });
             indexedDB.getItem("scales", (err, val) => {
-                if (!err) setScales(val);
+                if (!err && val) setScales(val);
             });
         })();
-    });
+    }, [modelLinks]);
 
     // useEffect(() => {
     //     if (patts) setPattUrls(patts.map(el => {
@@ -97,6 +97,10 @@ const CadAr = () => {
                         scale={scales[index]}
                         position={[0, 0, 0]}
                     />
+                    {/* <mesh>
+                        <boxBufferGeometry args={[1, 1, 1]} />
+                        <meshStandardMaterial color={"green"} transparent />
+                    </mesh> */}
                 </ARMarker>))
             }
         </ARCanvas>

@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Link, To } from "react-router-dom";
 import Home, { HomeProperties } from "./Home";
-import pushItem from "../util/pushItem";
+import { pushItem } from "../util/pushItem";
 import { Button, Slider } from '@mui/material';
 import FileChooser from "./FileChooser";
 import { encodeImageURL } from "../util/makeMarker";
-// import { encodeImage } from "../util/makeMarker";
 
 import "../Styles/FileUploadForm.css";
+import MarkerPreview from "./MarkerPreview";
 
 interface Marker {
-    // picture?: File,
-    marker?: Blob,
+    marker: Blob,
     url?: string,
 };
 
@@ -21,23 +20,22 @@ const MarkerUploaderButton = (props: {
     marker?: File
 }) => {
     const onMarkerAdd = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        if (props.marker) {
-            encodeImageURL(URL.createObjectURL(props.marker), (data: string) => {
-                const obj: Marker = {
-                    marker: props.marker,
-                    // url: URL.createObjectURL(props.marker),
-                };
-                // obj.marker = new Blob(
-                //     [encoded], {
-                //     type: "text/plain",
-                // });
-                // obj.url = URL.createObjectURL(obj.marker);
-            });
-
-            // pushItem("markers", obj);
+        if (!props.marker) {
+            pushItem("markers", null);
             return;
         }
-        pushItem("markers", null);
+
+        const onLoad = (encoded: string) => {
+            const obj: Marker = {
+                marker: new Blob([encoded], {
+                    type: "text/plain",
+                })
+            };
+            obj.url = URL.createObjectURL(obj.marker);
+            pushItem("markers", obj);
+        }
+
+        encodeImageURL(URL.createObjectURL(props.marker), onLoad);
     };
 
     return (
@@ -52,48 +50,21 @@ const MarkerUploaderButton = (props: {
     );
 };
 
-// const getFile = (pattText: string) => {
-//     // const len = pattText.length;
-//     // const array = new Uint8Array(len);
-//     // for (let i = 0; i < len; i++) {
-//     //     array[i] = pattText.charCodeAt(i);
-//     // }
-//     const file = new Blob([pattText], {
-//         type: "text/plain",
-//     });
-
-//     return file;
-// }
-
 const MarkerUploader = (props: HomeProperties) => {
     const [marker, setMarker] = useState<File | undefined>(undefined);
-    // const [pattText, setPattText] = useState<string>();
+    const [ratio, setRatio] = useState(0.5);
 
-    // useEffect(() => {
-    //     const setPattFileText = async () => {
-    //         if (marker) {
-    //             // setPattText(encodeImage(await getImageData(URL.createObjectURL(marker))));
-    //             setPattText(encodeImage(URL.createObjectURL(marker)));
-    //         }
-    //     }
-    //     setPattFileText();
-    // }, [marker]);
-
-    // useEffect(() => {
-    //     if (pattText) {
-    //         console.log("Patt string was generated successfully!", pattText);
-    //         pushItem("patts", getFile(pattText));
-    //     }
-    // }, [pattText]);
+    const ratioSliderOnChange = (_: Event, newValue: number | number[]) => {
+        setRatio(newValue as number);
+    };
 
     return (
         <div className="file-upload-form">
             <Home pathName={props.pathName} />
-            {marker &&
-                <img className="marker-preview"
-                    src={URL.createObjectURL(marker)}
-                    alt=""
-                />
+            {marker && <MarkerPreview
+                innerImageURL={URL.createObjectURL(marker)}
+                color="#000000"
+                ratio={ratio} />
             }
             <FileChooser
                 hint="Upload Marker"
@@ -103,14 +74,20 @@ const MarkerUploader = (props: HomeProperties) => {
                     setMarker(e.target.files?.item(0) || undefined);
                 }}
             />
-            {/* Pattern Ratio
-            <Slider defaultValue={0.5}
-                min={0.1}
-                max={0.9}
-                step={0.01}
-                aria-label="Default"
-                valueLabelDisplay="auto"
-            /> */}
+            {marker &&
+                <>
+                    Pattern Ratio
+                    <Slider className="cadar-slider"
+                        defaultValue={0.5}
+                        min={0.1}
+                        max={0.9}
+                        step={0.01}
+                        aria-label="Default"
+                        valueLabelDisplay="auto"
+                        onChange={ratioSliderOnChange}
+                    />
+                </>
+            }
             <MarkerUploaderButton message="Let's CAD-AR"
                 linkTo="/cad-ar"
                 marker={marker} />

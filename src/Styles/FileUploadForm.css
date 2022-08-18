@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 
+.cadar-slider {
+    max-width: 250px
+}
+
 .file-upload-form {
     display: flex;
     flex-direction: column;
