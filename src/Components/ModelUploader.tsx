@@ -7,6 +7,7 @@ import pushItem from "../util/pushItem";
 
 import "../Styles/FileUploadForm.css";
 import FileChooser from "./FileChooser";
+import { Button } from "@mui/material";
 
 const ModelUploader = (props: HomeProperties) => {
     const [model, setModel] = useState<File | null | undefined>(null);
@@ -48,7 +49,7 @@ const ModelUploader = (props: HomeProperties) => {
             <Home pathName={props.pathName} />
             <div className="input-area">
                 <FileChooser
-                    hint="Upload model file"
+                    hint="Upload .GLTF model"
                     disabled={!!link}
                     accept=".gltf, .txt"
                     onChange={onModelChange}
@@ -56,6 +57,8 @@ const ModelUploader = (props: HomeProperties) => {
                 or
                 <TextField
                     id="outlined-error-helper-text"
+                    className="outlined-error-helper-text inp"
+                    color="primary"
                     type="text"
                     error={!isLinkCorrect}
                     disabled={!!model}
@@ -65,20 +68,21 @@ const ModelUploader = (props: HomeProperties) => {
                     onChange={onLinkChange}
                 />
             </div>
-            <Slider defaultValue={0.5}
+            {/* <Slider defaultValue={0.5}
                 min={0.1}
                 max={1.0}
                 step={0.01}
                 aria-label="Default"
                 valueLabelDisplay="auto"
                 onChange={scaleSliderOnChange}
-            />
-            <Link to="/marker-uploader">
-                <button className="upload upload-button"
+            /> */}
+            <Link className="button-link" to="/marker-uploader">
+                <Button className="inp button-link"
+                    variant="contained"
                     disabled={!model && !link}
                     onClick={onAddModel}>
                     Add model
-                </button>
+                </Button>
             </Link>
         </div>
     );

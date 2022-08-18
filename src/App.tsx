@@ -12,13 +12,17 @@ import ModelUploader from './Components/ModelUploader';
 import MarkerUploader from './Components/MarkerUploader';
 
 import './Styles/App.css';
+import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
+
+const darkTheme = createTheme({
+  palette: {
+    // mode: 'dark',
+  },
+});
 
 const App = () => {
   return (
-    <div className="App">
-      <DecVert classNameProp='decVert' />
-      <DecVert classNameProp='decHor' />
-
+    <MuiThemeProvider theme={darkTheme}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={
@@ -35,7 +39,7 @@ const App = () => {
           } />
         </Routes>
       </BrowserRouter>
-    </div>
+    </MuiThemeProvider>
   );
 }
 

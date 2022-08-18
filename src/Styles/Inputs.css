@@ -1,0 +1,28 @@
+.button-link {
+    text-decoration: none !important;
+}
+
+.inp {
+    height: 50px;
+    width: 250px;
+}
+
+/* #common-button,
+.common-button {
+    background-color: #ffdf66;
+    font-size: 1.2rem;
+    color: rgb(33, 33, 33);
+    box-shadow: 4px 5px 11px -3px #000000, inset 4px 5px 6px -4px #ffffff77;
+    font-weight: 700;
+    height: 50px;
+    width: 250px;
+} */
+
+/* .outlined-error-helper-text {
+    background-color: #ffdf66;
+    border-radius: 5px;
+    box-shadow: 4px 5px 7px -2px #000000, inset 4px 5px 6px -2px #ffffff20;
+    color: rgb(33, 33, 33);
+    height: 50px;
+    width: 250px;
+} */

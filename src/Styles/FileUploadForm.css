@@ -6,6 +6,7 @@
     justify-content: space-evenly;
     align-items: center;
     height: 100%;
+    max-height: 500px;
     margin: 0;
     padding: 1.2rem;
 }
@@ -26,23 +27,8 @@
     box-sizing: border-box;
 }
 
-.upload {
-    border: 4px solid black;
-    box-shadow: 6px 6px black;
-    font-family: 'Roboto', sans-serif;
-}
-
-.upload-button {
-    background-color: #AEEC7E;
-}
-
-.upload-button:hover {
-    background-color: #ffe48c;
-}
-
-.upload-button:active {
-    background-color: #c58cff;
-    box-shadow: none;
+.home-link {
+    color: #000000;
 }
 
 .marker-preview {
@@ -73,11 +59,6 @@
         height: 50px;
         width: 230px;
     }
-
-    .upload-button:active {
-        width: 227px;
-        height: 53px;
-    }
 }
 
 @media screen and (min-width: 350px) {
@@ -100,10 +81,5 @@
     .upload-button {
         height: 65px;
         width: 300px;
-    }
-
-    .upload-button:active {
-        width: 297px;
-        height: 68px;
     }
 }
