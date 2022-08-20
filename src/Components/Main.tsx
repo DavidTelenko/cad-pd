@@ -1,14 +1,16 @@
 import { Link } from "react-router-dom";
-import { Button } from '@mui/material';
 import Home, { HomeProperties } from "./Home";
 import IndexedDB from 'localforage';
+
+import { Button } from '@mui/material';
+import { ViewInAr as ViewInArIcon } from '@mui/icons-material';
 
 import "../Styles/FileUploadForm.css";
 import "../Styles/Inputs.css";
 
 const Main = (props: HomeProperties) => {
     return (
-        <div>
+        <div className="file-upload-form main">
             <Home pathName={props.pathName} />
             <Link className="button-link" to="/model-uploader">
                 <Button variant="contained"
@@ -16,7 +18,13 @@ const Main = (props: HomeProperties) => {
                     id="common-button"
                     color="primary"
                     onClick={() => IndexedDB.clear()}>
-                    Let's CAD-AR!
+                    <ViewInArIcon />
+                </Button>
+            </Link>
+            <Link className="button-link" to="/files-preview">
+                <Button className="inp preview-button"
+                    variant="outlined">
+                    See all files
                 </Button>
             </Link>
         </div>

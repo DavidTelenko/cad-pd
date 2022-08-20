@@ -32,7 +32,10 @@
 }
 
 .home-link {
-    color: #000000;
+    color: #ffffff;
+    background-color: #1976D2;
+    border-radius: 5px;
+    padding: 5px 8px;
 }
 
 .marker-preview {
@@ -40,6 +43,10 @@
     height: 200px;
     object-fit: cover;
     border-radius: 10%;
+}
+
+.main {
+    justify-content: center;
 }
 
 @media screen and (min-width: 250px) {

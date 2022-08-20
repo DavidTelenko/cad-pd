@@ -7,11 +7,16 @@ import { pushItem } from "../util/pushItem";
 
 import "../Styles/FileUploadForm.css";
 import FileChooser from "./FileChooser";
-import { Button } from "@mui/material";
+import { Button, Tooltip } from "@mui/material";
+import {
+    UploadFile as UploadFileIcon,
+    ImportExport as ImportExportIcon,
+    ChevronRight as ChevronRightIcon
+} from '@mui/icons-material';
 
 const ModelUploader = (props: HomeProperties) => {
-    const [model, setModel] = useState<File | null | undefined>(null);
-    const [link, setLink] = useState<string | null | undefined>(null);
+    const [model, setModel] = useState<File | null | undefined>();
+    const [link, setLink] = useState<string | undefined>();
     const [scale, setScale] = useState<number>(1.0);
     const [isLinkCorrect, setIsLinkCorrect] = useState<boolean>(true);
 
@@ -22,8 +27,8 @@ const ModelUploader = (props: HomeProperties) => {
 
     const onLinkChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
-        const link: string = e.target.value;
-        const linkPatt: RegExp = /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*)$/gm;
+        const link = e.target.value;
+        const linkPatt = /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*)$/gm;
         setLink(link);
         setIsLinkCorrect(linkPatt.test(link));
     };
@@ -31,7 +36,7 @@ const ModelUploader = (props: HomeProperties) => {
     const onAddModel = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         if (model) {
             pushItem("models", model);
-            pushItem("links", URL.createObjectURL(model)); // URL.createObjectURL(model)
+            pushItem("links", URL.createObjectURL(model));
         }
         else {
             pushItem("links", link);
@@ -49,12 +54,16 @@ const ModelUploader = (props: HomeProperties) => {
             <Home pathName={props.pathName} />
             <div className="input-area">
                 <FileChooser
-                    hint="Upload .GLTF / .GLB model"
+                    tooltip=".gltf/.glb"
                     disabled={!!link}
                     accept=".gltf, .glb"
                     onChange={onModelChange}
-                />
-                or
+                >
+                    <UploadFileIcon />
+                </FileChooser>
+                <Tooltip title="or">
+                    <ImportExportIcon color="primary" fontSize="large" />
+                </Tooltip>
                 <TextField
                     id="outlined-error-helper-text"
                     className="outlined-error-helper-text inp"
@@ -82,7 +91,9 @@ const ModelUploader = (props: HomeProperties) => {
                     variant="contained"
                     disabled={!model && !link}
                     onClick={onAddModel}>
-                    Add model
+                    <Tooltip title="Add model">
+                        <ChevronRightIcon />
+                    </Tooltip>
                 </Button>
             </Link>
         </div>

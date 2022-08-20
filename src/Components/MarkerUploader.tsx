@@ -1,10 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { ReactNode, useState } from "react";
 import { Link, To } from "react-router-dom";
 import Home, { HomeProperties } from "./Home";
 import { pushItem } from "../util/pushItem";
-import { Button, Slider } from '@mui/material';
 import FileChooser from "./FileChooser";
 import { encodeImageURL } from "../util/makeMarker";
+
+import { Button, Slider } from '@mui/material';
+import {
+    Image as ImageIcon,
+    Add as AddIcon,
+    Visibility as EyeIcon
+} from '@mui/icons-material';
 
 import "../Styles/FileUploadForm.css";
 import MarkerPreview from "./MarkerPreview";
@@ -15,9 +21,10 @@ interface Marker {
 };
 
 const MarkerUploaderButton = (props: {
-    message: string,
     linkTo: To,
-    marker?: File
+    marker?: File,
+    preview?: string,
+    children?: ReactNode
 }) => {
     const onMarkerAdd = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         if (!props.marker) {
@@ -35,7 +42,10 @@ const MarkerUploaderButton = (props: {
             pushItem("markers", obj);
         }
 
-        encodeImageURL(URL.createObjectURL(props.marker), onLoad);
+        const url = URL.createObjectURL(props.marker);
+
+        encodeImageURL(url, onLoad);
+        if (props.preview) pushItem("marker-previews", props.preview);
     };
 
     return (
@@ -44,15 +54,16 @@ const MarkerUploaderButton = (props: {
                 variant="contained"
                 disabled={!props.marker}
                 onClick={onMarkerAdd}>
-                {props.message}
+                {props.children}
             </Button>
         </Link>
     );
 };
 
 const MarkerUploader = (props: HomeProperties) => {
-    const [marker, setMarker] = useState<File | undefined>(undefined);
+    const [marker, setMarker] = useState<File>();
     const [ratio, setRatio] = useState(0.5);
+    const [preview, setPreview] = useState<string>();
 
     const ratioSliderOnChange = (_: Event, newValue: number | number[]) => {
         setRatio(newValue as number);
@@ -61,39 +72,47 @@ const MarkerUploader = (props: HomeProperties) => {
     return (
         <div className="file-upload-form">
             <Home pathName={props.pathName} />
-            {marker && <MarkerPreview
-                innerImageURL={URL.createObjectURL(marker)}
-                color="#000000"
-                ratio={ratio} />
+            {marker &&
+                <MarkerPreview
+                    setPreview={setPreview}
+                    innerImageURL={URL.createObjectURL(marker)}
+                    color="#000000"
+                    ratio={ratio} />
             }
             <FileChooser
-                hint="Upload Marker"
-                accept=".patt, .png, .jpg, .jpeg"
+                tooltip=".png/.jpg/.jpeg"
+                accept=".png, .jpg, .jpeg" // TODO .patt, 
                 onChange={(e) => {
                     e.preventDefault();
                     setMarker(e.target.files?.item(0) || undefined);
                 }}
-            />
+            >
+                <ImageIcon />
+            </FileChooser>
             {marker &&
-                <>
-                    Pattern Ratio
-                    <Slider className="cadar-slider"
-                        defaultValue={0.5}
-                        min={0.1}
-                        max={0.9}
-                        step={0.01}
-                        aria-label="Default"
-                        valueLabelDisplay="auto"
-                        onChange={ratioSliderOnChange}
-                    />
-                </>
+                <Slider className="cadar-slider"
+                    defaultValue={0.5}
+                    min={0.1}
+                    max={0.9}
+                    step={0.01}
+                    aria-label="Default"
+                    valueLabelDisplay="auto"
+                    onChange={ratioSliderOnChange}
+                />
             }
-            <MarkerUploaderButton message="Let's CAD-AR"
-                linkTo="/cad-ar"
-                marker={marker} />
-            <MarkerUploaderButton message="Add another model"
+            <MarkerUploaderButton
                 linkTo="/model-uploader"
-                marker={marker} />
+                marker={marker}
+                preview={preview}>
+                <AddIcon />
+            </MarkerUploaderButton>
+
+            <MarkerUploaderButton
+                linkTo="/files-preview"
+                marker={marker}
+                preview={preview}>
+                <EyeIcon />
+            </MarkerUploaderButton>
         </div>
     );
 };

@@ -13,10 +13,14 @@ import MarkerUploader from './Components/MarkerUploader';
 
 import './Styles/App.css';
 import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
+import FilesPreview from './Components/preview/FilesPreview';
 
-const darkTheme = createTheme({
+export const darkTheme = createTheme({
   palette: {
     // mode: 'dark',
+    // primary: {
+    //   main: '#ff3311'
+    // }
   },
 });
 
@@ -33,10 +37,13 @@ const App = () => {
               <ModelUploader pathName="Model uploader" />
             } />
             <Route path="/marker-uploader" element={
-              <MarkerUploader pathName="Marker uploader" />
+              <MarkerUploader pathName="Model uploader > Marker uploader" />
             } />
             <Route path="/cad-ar" element={
               <CadAr />
+            } />
+            <Route path="/files-preview" element={
+              <FilesPreview pathName="Files Preview" />
             } />
           </Routes>
         </BrowserRouter>

@@ -6,3 +6,7 @@
     height: 50px;
     width: 250px;
 }
+
+.preview-button {
+    margin-top: 25px !important;
+}

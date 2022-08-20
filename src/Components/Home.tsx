@@ -10,7 +10,10 @@ export interface HomeProperties {
 const Home = (props: HomeProperties) => {
     return (
         <header className="App-header">
-            <Link to="/" className="home-link">CAD-AR</Link> {'>'} {props.pathName}
+            <Link to="/" className="home-link"
+                style={{ textDecoration: 'none' }}>
+                CAD-AR
+            </Link> {'>'} {props.pathName}
         </header>
     );
 }

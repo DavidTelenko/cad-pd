@@ -120,6 +120,7 @@ export const buildFullMarker = (
     // display innerImage in the middle
     let innerImage = document.createElement("img");
 
+    innerImage.crossOrigin = "Anonymous";
     innerImage.addEventListener("load", () => {
         // draw innerImage
         if (!context) return;

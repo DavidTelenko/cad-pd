@@ -16,7 +16,6 @@ canvas {
     left: 10px;
 }
 
-/* 
 #arjs-video,
 canvas {
     all: unset;
@@ -111,4 +110,4 @@ canvas {
     canvas {
         height: 700px !important;
     }
-} */
+}
