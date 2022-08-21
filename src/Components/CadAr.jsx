@@ -1,4 +1,4 @@
-import { useState, Suspense, useEffect } from 'react';
+import { useState, Suspense, useEffect } from "react";
 
 import { ARCanvas, ARMarker } from "@artcom/react-three-arjs";
 import { useLoader } from "@react-three/fiber";
@@ -11,10 +11,10 @@ import indexedDB from "localforage";
 
 import "../Styles/CadAr.css";
 
-const Model = ({ gltfLink, scale, size, color, ...rest }) => {
+const Model = ({ model, scale, size, color, ...rest }) => {
     const gltf = useLoader(
         GLTFLoader,
-        gltfLink
+        typeof model === "string" ? model : URL.createObjectURL(model)
         // "https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/scene.gltf"
     );
 
@@ -28,23 +28,21 @@ const Model = ({ gltfLink, scale, size, color, ...rest }) => {
 }
 
 const CadAr = () => {
-    const [modelLinks, setModelLinks] = useState();
     const [pattUrls, setPattUrls] = useState();
     const [scales, setScales] = useState();
+    const [models, setModels] = useState();
 
     useEffect(() => {
-        (() => {
-            indexedDB.getItem("links", (err, val) => {
-                if (!err && val) setModelLinks(val);
-            });
-            indexedDB.getItem("markers", (err, val) => {
-                if (!err && val) setPattUrls(val.map(e => e.url));
-            });
-            indexedDB.getItem("scales", (err, val) => {
-                if (!err && val) setScales(val);
-            });
-        })();
-    }, [modelLinks]);
+        indexedDB.getItem("markers", (err, val) => {
+            if (!err && val) setPattUrls(val.map(e => e.url));
+        });
+        indexedDB.getItem("scales", (err, val) => {
+            if (!err && val) setScales(val);
+        });
+        indexedDB.getItem("models", (err, val) => {
+            if (!err && val) setModels(val);
+        });
+    }, [models]);
 
     return (
         <ARCanvas
@@ -58,11 +56,11 @@ const CadAr = () => {
             <ambientLight />
             <pointLight position={[10, 10, 0]} />
             {
-                modelLinks && pattUrls && modelLinks.map((link, index) =>
+                models && pattUrls && models.map((model, index) =>
                 (<ARMarker type={"pattern"}
                     patternUrl={pattUrls[index]}
                     key={index}>
-                    <Model gltfLink={link}
+                    <Model model={model}
                         scale={scales[index]}
                         position={[0, 0, 0]}
                     />

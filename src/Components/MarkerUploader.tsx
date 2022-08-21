@@ -5,12 +5,12 @@ import { pushItem } from "../util/pushItem";
 import FileChooser from "./FileChooser";
 import { encodeImageURL } from "../util/makeMarker";
 
-import { Button, Slider } from '@mui/material';
+import { Button, Slider } from "@mui/material";
 import {
     Image as ImageIcon,
     Add as AddIcon,
     Visibility as EyeIcon
-} from '@mui/icons-material';
+} from "@mui/icons-material";
 
 import "../Styles/FileUploadForm.css";
 import MarkerPreview from "./MarkerPreview";

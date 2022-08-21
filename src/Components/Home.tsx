@@ -11,9 +11,9 @@ const Home = (props: HomeProperties) => {
     return (
         <header className="App-header">
             <Link to="/" className="home-link"
-                style={{ textDecoration: 'none' }}>
+                style={{ textDecoration: "none" }}>
                 CAD-AR
-            </Link> {'>'} {props.pathName}
+            </Link> {">"} {props.pathName}
         </header>
     );
 }

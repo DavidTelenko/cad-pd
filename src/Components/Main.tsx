@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import Home, { HomeProperties } from "./Home";
-import IndexedDB from 'localforage';
+import IndexedDB from "localforage";
 
-import { Button } from '@mui/material';
-import { ViewInAr as ViewInArIcon } from '@mui/icons-material';
+import { Button } from "@mui/material";
+import { ViewInAr as ViewInArIcon } from "@mui/icons-material";
 
 import "../Styles/FileUploadForm.css";
 import "../Styles/Inputs.css";

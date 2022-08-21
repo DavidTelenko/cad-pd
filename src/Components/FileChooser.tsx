@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { Button, Tooltip } from '@mui/material';
+import { Button, Tooltip } from "@mui/material";
 
 type InputProps = React.DetailedHTMLProps<
     React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> & {

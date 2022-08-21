@@ -7,9 +7,9 @@ interface DecProps {
 const DecVert = ({ classNameProp }: DecProps) => {
     return (
         <div className={classNameProp}>
-            <div className='rect'></div>
-            <div className='rect'></div>
-            <div className='rect'></div>
+            <div className="rect"></div>
+            <div className="rect"></div>
+            <div className="rect"></div>
         </div>
     )
 }

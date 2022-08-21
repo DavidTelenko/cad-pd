@@ -2,7 +2,7 @@
 // import { Link, To } from "react-router-dom";
 // import Home, { HomeProperties } from "./Home";
 // import { pushItem } from "../util/pushItem";
-// import { Button, Slider, TextField } from '@mui/material';
+// import { Button, Slider, TextField } from "@mui/material";
 // import FileChooser from "./FileChooser";
 // import { encodeImageURL } from "../util/makeMarker";
 
@@ -133,4 +133,4 @@
 // };
 
 // export default MarkerUploader;
-export {};
+export { };

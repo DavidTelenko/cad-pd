@@ -13,8 +13,8 @@ export const encodeImageURL = (
 
 export const encodeImage = (image: HTMLImageElement): string => {
     // copy image on canvas
-    let canvas = document.createElement('canvas');
-    let context = canvas.getContext('2d');
+    let canvas = document.createElement("canvas");
+    let context = canvas.getContext("2d");
     let patternFileString = "";
 
     if (!context) return patternFileString;
@@ -37,15 +37,15 @@ export const encodeImage = (image: HTMLImageElement): string => {
         const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
 
         // generate the patternFileString for this orientation
-        if (orientation !== 0) patternFileString += '\n';
+        if (orientation !== 0) patternFileString += "\n";
 
         // NOTE bgr order and not rgb!!! so from 2 to 0
         for (let channelOffset = 2; channelOffset >= 0; channelOffset--) {
-            // console.log('channelOffset', channelOffset)
+            // console.log("channelOffset", channelOffset)
             for (let y = 0; y < imageData.height; y++) {
                 for (let x = 0; x < imageData.width; x++) {
 
-                    if (x !== 0) patternFileString += ' ';
+                    if (x !== 0) patternFileString += " ";
 
                     const offset = (y * imageData.width * 4) + (x * 4) + channelOffset;
                     const value = imageData.data[offset];
@@ -53,7 +53,7 @@ export const encodeImage = (image: HTMLImageElement): string => {
                     patternFileString += String(value).padStart(3);
                 }
 
-                patternFileString += '\n';
+                patternFileString += "\n";
             }
         }
     }
@@ -63,13 +63,13 @@ export const encodeImage = (image: HTMLImageElement): string => {
 
 export const triggerDownload = (
     patternFileString: string,
-    fileName = 'pattern-marker.patt') => {
+    fileName = "pattern-marker.patt") => {
 
-    let domElement = window.document.createElement('a');
+    let domElement = window.document.createElement("a");
 
     domElement.href = window.URL.createObjectURL(
         new Blob([patternFileString], {
-            type: 'text/plain'
+            type: "text/plain"
         }));
 
     domElement.download = fileName;
@@ -90,14 +90,14 @@ export const buildFullMarker = (
 
     const innerMargin = whiteMargin + blackMargin
 
-    let canvas = document.createElement('canvas');
-    let context = canvas.getContext('2d');
+    let canvas = document.createElement("canvas");
+    let context = canvas.getContext("2d");
 
     if (!context) return;
 
     canvas.width = canvas.height = size
 
-    context.fillStyle = 'white';
+    context.fillStyle = "white";
     context.fillRect(0, 0, canvas.width, canvas.height)
 
     const prepareContext = (c: typeof color, margin: number) => {

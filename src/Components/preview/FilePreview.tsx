@@ -4,6 +4,8 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { Canvas, useLoader, Vector3 } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 
+import "../../Styles/modelPreview.css";
+
 interface FilePreviewProps {
     markerURL: string,
     modelURL: string
@@ -14,6 +16,7 @@ interface ModelProps {
     scale: Vector3,
     size?: number
     color?: number,
+    position?: Vector3
 };
 
 const Model = (props: ModelProps) => {
@@ -35,19 +38,20 @@ const FilePreview = (props: FilePreviewProps) => {
                 src={props.markerURL}
                 alt="marker"
             />
-            <Canvas
-                camera={{ position: [0, 0, 0], fov: 15 }}
-                style={{
-                    backgroundColor: '#111a21',
-                    width: '100vw',
-                    height: '100vh',
-                }}
-            >
-                <ambientLight />
-                <directionalLight intensity={0.4} />
-                <Model modelURL={props.modelURL} scale={[0.01, 0.01, 0.01]} />
-                <OrbitControls />
-            </Canvas>
+            <div className="model-preview">
+                {/* <Canvas
+                    camera={{ position: [0, 0, 0], fov: 70 }}
+                    style={{
+                        backgroundColor: "#111a21",
+                    }}
+                >
+                    <ambientLight />
+                    <directionalLight intensity={0.4} />
+                    <Model modelURL={props.modelURL} scale={[0.01, 0.01, 0.01]} position={[0, 0, 0]} />
+                    <OrbitControls makeDefault />
+                </Canvas> */}
+                {props.modelURL}
+            </div>
         </div>
     );
 };

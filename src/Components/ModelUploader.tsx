@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Home, { HomeProperties } from "./Home"
-import { Slider, TextField } from '@mui/material'
+import { Slider, TextField } from "@mui/material"
 
 import { pushItem } from "../util/pushItem";
 
@@ -12,7 +12,7 @@ import {
     UploadFile as UploadFileIcon,
     ImportExport as ImportExportIcon,
     ChevronRight as ChevronRightIcon
-} from '@mui/icons-material';
+} from "@mui/icons-material";
 
 const ModelUploader = (props: HomeProperties) => {
     const [model, setModel] = useState<File | null | undefined>();
@@ -36,11 +36,9 @@ const ModelUploader = (props: HomeProperties) => {
     const onAddModel = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         if (model) {
             pushItem("models", model);
-            pushItem("links", URL.createObjectURL(model));
         }
         else {
-            pushItem("links", link);
-            pushItem("models", null);
+            pushItem("models", link);
         }
         pushItem("scales", scale);
     };

@@ -1,25 +1,25 @@
-import React from 'react';
+import React from "react";
 import {
   BrowserRouter,
   Routes,
   Route,
 } from "react-router-dom";
 
-import DecVert from './Components/DecVert';
-import Main from './Components/Main';
-import CadAr from './Components/CadAr';
-import ModelUploader from './Components/ModelUploader';
-import MarkerUploader from './Components/MarkerUploader';
+import DecVert from "./Components/DecVert";
+import Main from "./Components/Main";
+import CadAr from "./Components/CadAr";
+import ModelUploader from "./Components/ModelUploader";
+import MarkerUploader from "./Components/MarkerUploader";
 
-import './Styles/App.css';
-import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
-import FilesPreview from './Components/preview/FilesPreview';
+import "./Styles/App.css";
+import { MuiThemeProvider, createTheme } from "@material-ui/core/styles";
+import FilesPreview from "./Components/preview/FilesPreview";
 
 export const darkTheme = createTheme({
   palette: {
-    // mode: 'dark',
+    // mode: "dark",
     // primary: {
-    //   main: '#ff3311'
+    //   main: "#ff3311"
     // }
   },
 });
