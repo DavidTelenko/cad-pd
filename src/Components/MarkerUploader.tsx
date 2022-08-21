@@ -15,11 +15,6 @@ import {
 import "../Styles/FileUploadForm.css";
 import MarkerPreview from "./MarkerPreview";
 
-interface Marker {
-    marker: Blob,
-    url?: string,
-};
-
 const MarkerUploaderButton = (props: {
     linkTo: To,
     marker?: File,
@@ -33,18 +28,13 @@ const MarkerUploaderButton = (props: {
         }
 
         const onLoad = (encoded: string) => {
-            const obj: Marker = {
-                marker: new Blob([encoded], {
-                    type: "text/plain",
-                })
-            };
-            obj.url = URL.createObjectURL(obj.marker);
-            pushItem("markers", obj);
+            const markerPatt = new Blob([encoded], {
+                type: "text/plain",
+            });
+            pushItem("markers", markerPatt);
         }
 
-        const url = URL.createObjectURL(props.marker);
-
-        encodeImageURL(url, onLoad);
+        encodeImageURL(URL.createObjectURL(props.marker), onLoad);
         if (props.preview) pushItem("marker-previews", props.preview);
     };
 

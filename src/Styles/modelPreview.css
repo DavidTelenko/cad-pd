@@ -1,4 +1,45 @@
 .file-preview-card>.model-preview {
     width: 200px;
     height: 200px;
+    border-radius: 10%;
+}
+
+.canvas-model-preview,
+.canvas-model-preview>canvas {
+    width: 200px !important;
+    height: 200px !important;
+    border-radius: 10%;
+}
+
+.file-preview-card {
+    display: flex;
+    width: 100%;
+    margin: 10px;
+}
+
+.files-preview {
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 350px;
+    width: 90%;
+}
+
+.files-preview-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    height: 100%;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    /* background-color: rgb(255, 255, 255); */
+}
+
+::-webkit-scrollbar-thumb {
+    background: #7d7d7d;
+    border-radius: 3px;
+    background-clip: padding-box;
 }

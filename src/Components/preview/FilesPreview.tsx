@@ -5,10 +5,10 @@ import { Link } from "react-router-dom";
 import Home, { HomeProperties } from "../Home";
 import FilePreview from "./FilePreview";
 import { ViewInAr as ViewInArIcon } from "@mui/icons-material";
-import { useNavigate } from "react-router-dom";
+
+import "../../Styles/modelPreview.css";
 
 const FilesPreview = (props: HomeProperties) => {
-    const navigate = useNavigate();
     const [markerURLs, setMarkerURLs] = useState<string[]>();
     const [modelURLs, setModelURLs] = useState<string[]>();
 
@@ -25,21 +25,23 @@ const FilesPreview = (props: HomeProperties) => {
                             ? e
                             : URL.createObjectURL(e)));
                 });
-            // navigate(0);
         })();
-    }, [])
+        console.log(markerURLs, modelURLs);
+    }, modelURLs && markerURLs && [])
 
     return (
-        <div>
+        <div className="files-preview-container">
             <Home pathName={props.pathName} />
-            {markerURLs && modelURLs && markerURLs.map((e, i) => {
-                return (
-                    <FilePreview
-                        key={i}
-                        markerURL={e}
-                        modelURL={modelURLs[i]} />
-                );
-            })}
+            <div className="files-preview">
+                {markerURLs && modelURLs && markerURLs.map((e, i) => {
+                    return (
+                        <FilePreview
+                            key={i}
+                            markerURL={e}
+                            modelURL={modelURLs[i]} />
+                    );
+                })}
+            </div>
             <Link className="button-link" to="/cad-ar">
                 <Button className="inp upload upload-button"
                     variant="contained"

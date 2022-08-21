@@ -34,7 +34,7 @@ const CadAr = () => {
 
     useEffect(() => {
         indexedDB.getItem("markers", (err, val) => {
-            if (!err && val) setPattUrls(val.map(e => e.url));
+            if (!err && val) setPattUrls(val.map(e => URL.createObjectURL(e)));
         });
         indexedDB.getItem("scales", (err, val) => {
             if (!err && val) setScales(val);
@@ -42,7 +42,7 @@ const CadAr = () => {
         indexedDB.getItem("models", (err, val) => {
             if (!err && val) setModels(val);
         });
-    }, [models]);
+    }, models && []);
 
     return (
         <ARCanvas
